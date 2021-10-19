@@ -109,6 +109,12 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 
 </details> <br/>
 
+## Demo
+
+[Video hướng dẫn + demo](https://youtu.be/g4zh9p-QfAQ) 
+
+**Lưu ý:** Trong video thì mình đã cài sẵn nodejs rồi, nên sẽ không huớng dẫn cách cài nữa nhé.
+
 ## CÀI ĐẶT VÀ SỬ DỤNG
 
 Để có thể chạy tool thì bạn làm các bước sau:
