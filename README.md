@@ -15,6 +15,18 @@
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
+- **Update**(20/10/2021):
+
+  - Chức năng tải ảnh với độ phân giải GỐC:
+  - ![](./screenshots/13.png)
+  - **Ưu điểm**:
+    - Tải ảnh gốc chắc chắn là sướng hơn ảnh bị nén rồi :)))))))
+  - **Nhược điểm**:
+    - Tốc độ tải chậm hơn tải ảnh chất lượng thường (Do với mỗi ảnh phải gọi thêm 1 API để lấy link tải ảnh gốc)
+    - Tỷ lệ bị ban (FB không cho tải nữa và tự đăng xuất}) cao hơn, do gọi API liên tục.
+      - => Các bạn chỉ cần login lại và lấy access token mới là tải được tiếp
+    - Để giảm tỷ lệ bị ban, hãy tăng thời gian chờ ở biến WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO trong file [config.js](./config.js) nhé
+
 - **Update**(03/10/2021):
 
   - Giao diện tiếng việt có dấu.

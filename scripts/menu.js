@@ -69,6 +69,10 @@ const menuDownloadAlbum = async () => {
           from_photo_id_text == "0" ? null : from_photo_id_text;
         const is_largest_photo = largest_photo == "0" ? false : true;
 
+        if (action.key == 2 && is_largest_photo) {
+          console.log(`[!] Lưu LINK ảnh chất lương cao hiện chưa hỗ trợ.`);
+        }
+
         action.key == 1
           ? await downloadAlbumPhoto({
               albumId: album_id,
@@ -113,6 +117,11 @@ const menuDownloadWallMedia = async () => {
             "> Tải ảnh chất lượng cao nhất? (0-Không, 1-Có): "
           );
           const is_largest_photo = largest_photo == "0" ? false : true;
+
+          if (action.key == 2 && is_largest_photo) {
+            console.log(`[!] Lưu LINK ảnh chất lương cao hiện chưa hỗ trợ.`);
+          }
+
           action.key == 1
             ? await downloadWallMedia({
                 targetId: target_id,
