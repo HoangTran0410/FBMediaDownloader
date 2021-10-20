@@ -62,17 +62,23 @@ const menuDownloadAlbum = async () => {
         const from_photo_id_text = await prompt(
           "> Tải từ vị trí id ảnh nào? (Nhập 0 để tải từ đầu album): "
         );
+        const largest_photo = await prompt(
+          "> Tải ảnh chất lượng cao nhất? (0-Không, 1-Có): "
+        );
         const from_photo_id =
           from_photo_id_text == "0" ? null : from_photo_id_text;
+        const is_largest_photo = largest_photo == "0" ? false : true;
 
         action.key == 1
           ? await downloadAlbumPhoto({
               albumId: album_id,
               fromPhotoId: from_photo_id,
+              isGetLargestPhoto: is_largest_photo,
             })
           : await downloadAlbumPhotoLinks({
               albumId: album_id,
               fromPhotoId: from_photo_id,
+              isGetLargestPhoto: is_largest_photo,
             });
       }
     }
@@ -99,20 +105,26 @@ const menuDownloadWallMedia = async () => {
         const page_limit = await prompt(
           "> Tải bao nhiêu trang (Nhập 0 để tải mọi thứ trên tường): "
         );
-        const include_video = await prompt(
-          "> Có tải cả video không (0-Không, 1-Có): "
-        );
         if (page_limit >= 0) {
+          const include_video = await prompt(
+            "> Có tải cả video không (0-Không, 1-Có): "
+          );
+          const largest_photo = await prompt(
+            "> Tải ảnh chất lượng cao nhất? (0-Không, 1-Có): "
+          );
+          const is_largest_photo = largest_photo == "0" ? false : true;
           action.key == 1
             ? await downloadWallMedia({
                 targetId: target_id,
                 includeVideo: include_video == 1 ? true : false,
                 pageLimit: page_limit == 0 ? Infinity : page_limit,
+                isGetLargestPhoto: is_largest_photo,
               })
             : await downloadWallMediaLinks({
                 targetId: target_id,
                 includeVideo: include_video == 1 ? true : false,
                 pageLimit: page_limit == 0 ? Infinity : page_limit,
+                isGetLargestPhoto: is_largest_photo,
               });
         }
       }

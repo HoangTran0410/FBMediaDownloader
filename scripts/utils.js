@@ -1,6 +1,16 @@
 import fetch from "node-fetch";
 import https from "https";
 import fs from "fs";
+import { FB_API_HOST } from "./constants.js";
+import { ACCESS_TOKEN } from "../config.js";
+
+// Dùng FB API lấy link hình ảnh có độ phân giải lớn nhất từ id ảnh truyền vào
+// Trả về undefined nếu không tìm thấy
+export const getLargestPhotoLink = async (photo_id) => {
+  let url = `${FB_API_HOST}/${photo_id}?fields=largest_image&access_token=${ACCESS_TOKEN}`;
+  const json = await myFetch(url);
+  return json?.largest_image?.source;
+};
 
 export const myFetch = async (_url) => {
   try {

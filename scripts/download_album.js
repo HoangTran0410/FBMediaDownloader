@@ -11,6 +11,7 @@ import {
   createIfNotExistDir,
   deleteFile,
   download,
+  getLargestPhotoLink,
   myFetch,
   saveToFile,
   sleep,
@@ -111,7 +112,11 @@ export const fetchAlbumInfo = async (albumId) => {
 };
 
 // Tải và lưu tất cả id hình ảnh + link hình ảnh từ album, lưu vào file có tên trùng với albumId, lưu trong folder links
-export const downloadAlbumPhotoLinks = async ({ albumId, fromPhotoId }) => {
+export const downloadAlbumPhotoLinks = async ({
+  albumId,
+  fromPhotoId,
+  isGetLargestPhoto = false,
+}) => {
   const from_text = fromPhotoId
     ? "vị trí photo_id=" + fromPhotoId
     : "đầu album";
@@ -125,6 +130,11 @@ export const downloadAlbumPhotoLinks = async ({ albumId, fromPhotoId }) => {
     fromPhotoId,
     pageFetchedCallback: (pageImgsData) => {
       console.log(`Đang lưu link vào file ${fileName}`);
+
+      if (isGetLargestPhoto) {
+        // TODO  gett largest photo link
+      }
+
       saveToFile(
         fileName,
         pageImgsData.map((_) => _.id + ID_LINK_SEPERATOR + _.url).join("\n"),
@@ -135,7 +145,11 @@ export const downloadAlbumPhotoLinks = async ({ albumId, fromPhotoId }) => {
 };
 
 // Tải và lưu tất cả HÌNH ẢNH từ album, lưu từng file ảnh bằng id của ảnh và lưu hết vào folder images/albumId/
-export const downloadAlbumPhoto = async ({ albumId, fromPhotoId }) => {
+export const downloadAlbumPhoto = async ({
+  albumId,
+  fromPhotoId,
+  isGetLargestPhoto = false,
+}) => {
   const from_text = fromPhotoId
     ? "vị trí photo_id=" + fromPhotoId
     : "đầu album";
@@ -151,7 +165,15 @@ export const downloadAlbumPhoto = async ({ albumId, fromPhotoId }) => {
 
       // save all photo to directory
       for (let data of pageImgsData) {
-        const { id: photo_id, url: photo_url } = data;
+        let { id: photo_id, url: photo_url } = data;
+
+        if (isGetLargestPhoto) {
+          console.log(
+            `Đang tìm ảnh có độ phân giải lớn nhất của ${photo_id}...`
+          );
+          photo_url = (await getLargestPhotoLink(photo_id)) || photo_url;
+        }
+
         const savePath = `${dir}/${photo_id}.${PHOTO_FILE_FORMAT}`;
         try {
           console.log(`Đang lưu ${saved}: ${savePath}...`);

@@ -12,6 +12,7 @@ import {
   createIfNotExistDir,
   deleteFile,
   download,
+  getLargestPhotoLink,
   myFetch,
   saveToFile,
   sleep,
@@ -170,6 +171,7 @@ export const downloadWallMediaLinks = async ({
   targetId,
   includeVideo = true,
   pageLimit = Infinity,
+  isGetLargestPhoto = false,
 }) => {
   console.log(`ĐANG TẢI DỮ LIỆU TRÊN TƯỜNG CỦA ${targetId}...`);
 
@@ -182,6 +184,10 @@ export const downloadWallMediaLinks = async ({
     pageFetchedCallback: (media) => {
       if (!includeVideo)
         media = media.filter((m) => m.type !== MEDIA_TYPE.VIDEO);
+
+      if (isGetLargestPhoto) {
+        // TODO get largest photo link 
+      }
 
       saveToFile(
         fileName,
@@ -197,6 +203,7 @@ export const downloadWallMedia = async ({
   targetId,
   includeVideo = true,
   pageLimit = Infinity,
+  isGetLargestPhoto = false,
 }) => {
   console.log(`ĐANG TẢI DỮ LIỆU TRÊN TƯỜNG CỦA ${targetId}...`);
   let saved = 0;
@@ -210,7 +217,14 @@ export const downloadWallMedia = async ({
 
       // save all photo to directory
       for (let data of media) {
-        const { id: media_id, url: media_url, type: media_type } = data;
+        let { id: media_id, url: media_url, type: media_type } = data;
+
+        if (isGetLargestPhoto && media_type == MEDIA_TYPE.PHOTO) {
+          console.log(
+            `Đang tìm ảnh có độ phân giải lớn nhất của ${media_id}...`
+          );
+          media_url = (await getLargestPhotoLink(media_id)) || media_url;
+        }
 
         if (!includeVideo && media_type === MEDIA_TYPE.VIDEO) {
           console.log(`Bỏ qua video: ${media_url}`);
