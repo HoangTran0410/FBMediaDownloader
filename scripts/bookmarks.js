@@ -379,3 +379,12 @@ javascript: (function () {
     alert("Vui lòng tải lại trang và thử lại.");
   });
 })();
+
+// Hàm lưu dữ liệu 1 biến javascript xuống file
+let saveToFile = (jsonData, fileName) => {
+  var hiddenElement = document.createElement("a");
+  hiddenElement.href = "data:attachment/text," + JSON.stringify(jsonData);
+  hiddenElement.target = "_blank";
+  hiddenElement.download = fileName;
+  hiddenElement.click();
+};
