@@ -220,6 +220,7 @@ export const downloadWallMedia = async ({
         let { id: media_id, url: media_url, type: media_type } = data;
 
         if (isGetLargestPhoto && media_type == MEDIA_TYPE.PHOTO) {
+          await sleep(WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO);
           console.log(
             `Đang tìm ảnh có độ phân giải lớn nhất của ${media_id}...`
           );

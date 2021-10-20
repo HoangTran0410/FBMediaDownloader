@@ -6,6 +6,7 @@ import {
   FOLDER_TO_SAVE_LINKS,
   FOLDER_TO_SAVE_ALBUM_MEDIA,
   PHOTO_FILE_FORMAT,
+  WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO,
 } from "../config.js";
 import {
   createIfNotExistDir,
@@ -168,6 +169,7 @@ export const downloadAlbumPhoto = async ({
         let { id: photo_id, url: photo_url } = data;
 
         if (isGetLargestPhoto) {
+          await sleep(WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO);
           console.log(
             `Đang tìm ảnh có độ phân giải lớn nhất của ${photo_id}...`
           );
