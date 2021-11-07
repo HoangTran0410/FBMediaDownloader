@@ -1,4 +1,4 @@
-// Lấy access token - Chỉ gọi được hàm này trong trang m.facebook.com
+// Lấy access token (không thời hạn, full quyền, user token) - Chỉ gọi được hàm này trong trang m.facebook.com
 javascript: (function () {
   if (window.location.host === "m.facebook.com") {
     console.log("Đang lấy token ...");
@@ -23,6 +23,35 @@ javascript: (function () {
     );
     window.open("https://m.facebook.com");
   }
+})();
+
+// Lấy access token (có thời hạn. app token) Dùng cho www.facebook.com
+javascript: (function () {
+  var uid = /(?<=c_user=)(\d+)/.exec(document.cookie)[0],
+    dtsg =
+      require("DTSGInitialData").token ||
+      document.querySelector('[name="fb_dtsg"]').value,
+    http = new XMLHttpRequest(),
+    url = "//www.facebook.com/v1.0/dialog/oauth/confirm",
+    params =
+      "fb_dtsg=" +
+      dtsg +
+      "&app_id=124024574287414&redirect_uri=fbconnect%3A%2F%2Fsuccess&display=page&access_token=&from_post=1&return_format=access_token&domain=&sso_device=ios&_CONFIRM=1&_user=" +
+      uid;
+  http.open("POST", url, !0),
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
+    (http.onreadystatechange = function () {
+      if (4 == http.readyState && 200 == http.status) {
+        var a = http.responseText.match(/(?<=access_token=)(.*?)(?=\&)/);
+        console.log(http.responseText);
+        if (a && a[0]) {
+          prompt("Token", a[0]);
+        } else {
+          alert("Failed to Get Access Token.");
+        }
+      }
+    }),
+    http.send(params);
 })();
 
 // Lấy timeline album id của page - khi đang trong trang của page fb. Ví dụ: https://www.facebook.com/profile.php?id=100057998562930
@@ -170,6 +199,8 @@ javascript: (function () {
   );
 })();
 
+// Đăng nhập fb bằng access token: https://tienich.xyz/code-dang-nhap-facebook-bang-access-token-2018/
+
 // Lấy tất cả video id có trong trang
 javascript: (function () {
   const list_a = document.querySelectorAll("a");
@@ -230,28 +261,6 @@ javascript: !(function () {
     title,
     "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600"
   );
-})();
-
-// Lấy access token Dùng cho www.facebook.com - script chưa được kiểm định an toàn
-javascript: (function () {
-  var uid = document.cookie.match(/c_user=(d+)/)[1],
-    dtsg = document.getElementsByName("fb_dtsg")[0].value,
-    http = new XMLHttpRequest(),
-    url = "//www.facebook.com/v1.0/dialog/oauth/confirm",
-    params =
-      "fb_dtsg=" +
-      dtsg +
-      "&app_id=124024574287414&redirect_uri=fbconnect%3A%2F%2Fsuccess&display=page&access_token=&from_post=1&return_format=access_token&domain=&sso_device=ios&_CONFIRM=1&_user=" +
-      uid;
-  http.open("POST", url, !0),
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded"),
-    (http.onreadystatechange = function () {
-      if (4 == http.readyState && 200 == http.status) {
-        var a = http.responseText.match(/access_token=(.*)(?=&expires_in)/);
-        (a = a ? a[1] : "Failed to Get Access Token."), prompt("Token", a);
-      }
-    }),
-    http.send(params);
 })();
 
 // Lấy tất cả id của member trong group
