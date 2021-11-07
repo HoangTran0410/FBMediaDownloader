@@ -1,32 +1,40 @@
 // Lấy access token (không thời hạn, full quyền, user token) - Chỉ gọi được hàm này trong trang m.facebook.com
+// - HIỆN ĐANG LỖI, FB KHÔNG CÒN CÔNG KHAI ACCESSTOKEN NỮA, NÊN HÀM NÀY SẼ KO LẤY ĐC ACCESSTOKEN
 javascript: (function () {
-  if (window.location.host === "m.facebook.com") {
-    console.log("Đang lấy token ...");
-    fetch("https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed")
-      .then((response) => response.text())
-      .then((text) => {
-        if ("<" == text[0]) {
-          alert("Chưa đăng nhập. Bạn cần đăng nhập fb thì mới lấy được token.");
-        } else {
-          const data = {
-            token: /(?<=accessToken\\":\\")(.*?)(?=\\")/.exec(text)[0],
-            fb_dtsg: /(?<=fb_dtsg\\" value=\\")(.*?)(?=\\")/.exec(text)[0],
-            id: /(?<=USER_ID\\":\\").*?(?=\\",\\")/gm.exec(text)[0],
-          };
-          console.log(data);
-          window.prompt("Access Token của bạn:", data.token);
-        }
-      });
-  } else {
+  if (window.location.host !== "m.facebook.com") {
     alert(
       "Bookmark này chỉ hoạt động trên trang m.facebook.com\nBạn hãy vào trang m.facebook.com và ấn lại bookmark để lấy token an toàn nhé."
     );
     window.open("https://m.facebook.com");
+    return;
   }
+  console.log("Đang lấy token ...");
+  fetch("https://m.facebook.com/composer/ocelot/async_loader/?publisher=feed")
+    .then((response) => response.text())
+    .then((text) => {
+      if ("<" == text[0]) {
+        alert("Chưa đăng nhập. Bạn cần đăng nhập fb thì mới lấy được token.");
+      } else {
+        const data = {
+          token: /(?<=accessToken\\":\\")(.*?)(?=\\")/.exec(text)[0],
+          fb_dtsg: /(?<=fb_dtsg\\" value=\\")(.*?)(?=\\")/.exec(text)[0],
+          id: /(?<=USER_ID\\":\\").*?(?=\\",\\")/gm.exec(text)[0],
+        };
+        console.log(data);
+        window.prompt("Access Token của bạn:", data.token);
+      }
+    });
 })();
 
 // Lấy access token (có thời hạn. app token) Dùng cho www.facebook.com
 javascript: (function () {
+  if (window.location.host !== "www.facebook.com") {
+    alert(
+      "Bookmark này chỉ dùng được trong trang www.facebook.com.\nBạn hãy vào trang www.facebook.com và ấn lại bookmark để lấy token nhé."
+    );
+    window.open("https://www.facebook.com");
+    return;
+  }
   var uid = /(?<=c_user=)(\d+)/.exec(document.cookie)[0],
     dtsg =
       require("DTSGInitialData").token ||
@@ -198,6 +206,10 @@ javascript: (function () {
     "https://www.facebook.com/ColourfulSpace"
   );
 })();
+
+// =====================================================================
+// =============================== BONUS ===============================
+// =====================================================================
 
 // Đăng nhập fb bằng access token: https://tienich.xyz/code-dang-nhap-facebook-bang-access-token-2018/
 
