@@ -13,11 +13,17 @@
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
-- **Update**(08/11/2021)
+- **FIX**(12/11/2021)
+  - Đã tìm được cách lấy token (hầu như) full quyền
+  - Mọi người làm theo hướng dẫn trong link [Này](https://alotoi.com/get-token-full-quyen/#Cach_1_Get_token_qua_ung_dung_Instagram) nhé
+  - Cách này khó làm bookmark quá nên mọi người chịu khó làm bằng tay nhé :))
+  - Lấy token cũng làm 1 lần rồi là xong mà :)) khi nào không dùng được nữa mới phải lấy lại.
+
+- **FIX**(08/11/2021)
   - Sau khi fb cập nhật thì bookmark lấy accesstoken đã không còn dùng được nữa, do fb đã giấu mất accesstoken.
   - Do đó mình đã tạo 1 bookmark mới "Lấy access token (có thời hạn. app token)"
   - Cách lấy này chỉ lấy được token dạng app token, không full quyền như user token cũ
-  - Nên có thể vài chức năng sẽ không hoạt động được
+  - Nên có thể vài chức năng sẽ không hoạt động được *(chức năng tải ảnh/video trên tường đối tượng)*
   - Mình sẽ tìm cách để fix lỗi này và cập nhật nhanh nhất có thể
 
 - **Update**(20/10/2021):

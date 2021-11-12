@@ -7,6 +7,7 @@ import {
   PHOTO_FILE_FORMAT,
   VIDEO_FILE_FORMAT,
   WAIT_BEFORE_NEXT_FETCH,
+  WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO,
 } from "../config.js";
 import {
   createIfNotExistDir,
