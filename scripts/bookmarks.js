@@ -1,9 +1,28 @@
-// QUAN TRỌNG: LẤY ACCESS TOKEN FULL QUYỀN, CÁC BẠN LÀM THEO HƯỚNG DẪN TRONG LINK SAU:
+// (MỚI) CẬP NHẬT CÁCH LẤY TOKEN FULL QUYỀN (01/03/2022):
+javascript: (function () {
+  if (window.location.host !== "business.facebook.com") {
+    alert(
+      "Bookmark này chỉ hoạt động trên trang https://business.facebook.com/content_management/\nBạn hãy vào trang web trên và ấn lại bookmark để lấy token an toàn nhé."
+    );
+    window.open("https://business.facebook.com/content_management/");
+    return;
+  }
+
+  try {
+    const accessToken =
+      "EAAG" + /(?<=EAAG)(.*?)(?=\")/.exec(document.body.textContent)[0];
+    window.prompt("Access Token của bạn:", accessToken);
+  } catch (e) {
+    alert("LỖI: " + e.message);
+  }
+})();
+
+// (CŨ) QUAN TRỌNG: LẤY ACCESS TOKEN FULL QUYỀN, CÁC BẠN LÀM THEO HƯỚNG DẪN TRONG LINK SAU:
 // https://alotoi.com/get-token-full-quyen/#Cach_1_Get_token_qua_ung_dung_Instagram
 
 // 2 CÁI LẤY TOKEN PHÍA DƯỚI HIỆN ĐANG LỖI NÊN MỌI NGƯỜI ĐỪNG XÀI NHÉ.
 
-// Lấy access token (không thời hạn, full quyền, user token) - Chỉ gọi được hàm này trong trang m.facebook.com
+// (CŨ) Lấy access token (không thời hạn, full quyền, user token) - Chỉ gọi được hàm này trong trang m.facebook.com
 // - HIỆN ĐANG LỖI, FB KHÔNG CÒN CÔNG KHAI ACCESSTOKEN NỮA, NÊN HÀM NÀY SẼ KO LẤY ĐC ACCESSTOKEN
 javascript: (function () {
   if (window.location.host !== "m.facebook.com") {
@@ -31,7 +50,7 @@ javascript: (function () {
     });
 })();
 
-// Lấy access token (có thời hạn. app token) Dùng cho www.facebook.com
+// (CŨ) Lấy access token (có thời hạn. app token) Dùng cho www.facebook.com
 // - HIỆN ĐANG LỖI: BOOKMARK này không toàn quyền, theo vài bạn test thử thì chức năng tải hình/video trên tường đối tượng không chạy được
 javascript: (function () {
   if (window.location.host !== "www.facebook.com") {

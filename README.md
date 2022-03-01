@@ -13,8 +13,14 @@
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
+- **UPDATE**(01/03/2022)
+  - Đã tìm được cách lấy token full quyền. Các bạn vào file bookmarks.js để lấy nhé, ngay đầu file luôn. Mong fb sẽ không fix :)
+  - Nếu bị fix thì có những cách khác các bạn có thể thử:
+    - Mua acc clone => sẽ có token full quyền
+    - Tool log giả lập android
+
 - **FIX**(12/11/2021)
-  - Đã tìm được cách lấy token (hầu như) full quyền
+  - Đã tìm được cách lấy token (hầu như) full quyền (UPDATE: Không còn full quyền)
   - Mọi người làm theo hướng dẫn trong link [Này](https://alotoi.com/get-token-full-quyen/#Cach_1_Get_token_qua_ung_dung_Instagram) nhé
   - Cách này khó làm bookmark quá nên mọi người chịu khó làm bằng tay nhé :))
   - Lấy token cũng làm 1 lần rồi là xong mà :)) khi nào không dùng được nữa mới phải lấy lại.
@@ -175,6 +181,15 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 - Tham khảo cách làm việc với Facebook API từ [Hoàng Minh Dùng MMO](https://www.youtube.com/watch?v=auTBuwZOrBo&list=PL4BMIU_JnQBRSVZcc_ey0LDZdARdeuCh2&index=1)
 
 ## LỖI ĐÃ BIẾT
+
+<details>
+<summary> LỖI Tìm thấy 0 hình ảnh </summary>
+
+- => **LÝ DO**: Có thể do accessToken của bạn chưa full quyền. Nên sẽ không lấy được dữ liệu hình ảnh/video.
+
+- => **XỬ LÝ**: Hãy sử dụng bookmark mới nhất (01/03/2022) để lấy được token full quyền và thử lại nhé
+
+</details>
 
 <details>
 <summary> LỖI dừng tải ảnh do đường truyền bị ngắt </summary>
