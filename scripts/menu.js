@@ -191,7 +191,7 @@ export const menu = async () => {
       2: "Tìm timeline album id của page",
       3: "Tải album (của user/page/group)",
       4: "Tải ảnh/video trên tường của đối tượng (user/group/page)",
-      5: "Tải toàn bộ ảnh/video của user",
+      5: "[MỚI] Tải toàn bộ ảnh/video của user",
       6: "Hỗ trợ",
       7: "Thoát",
     });

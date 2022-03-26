@@ -13,26 +13,33 @@
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
-- **UPDATE**(01/03/2022)
+- **UPDATE** (27/03/2022)
+  - Thêm chức năng mới: 
+    - Tải toàn bộ/một phần ảnh/video từ user. (Chức năng số 5).
+    - Chức năng này dành cho bạn nào muốn tải ảnh/video từ user. Chưa hỗ trợ group, page.
+    - Hỗ trợ tải từ vị trí ảnh bất kỳ (Nếu có lỗi thì tải tiếp, ko cần tải lại từ đầu).
+  - Fix vài lỗi nhỏ.
+
+- **UPDATE** (01/03/2022)
   - Đã tìm được cách lấy token full quyền. Các bạn vào file bookmarks.js để lấy nhé, ngay đầu file luôn. Mong fb sẽ không fix :)
   - Nếu bị fix thì có những cách khác các bạn có thể thử:
     - Mua acc clone => sẽ có token full quyền
     - Tool log giả lập android
 
-- **FIX**(12/11/2021)
+- **FIX** (12/11/2021)
   - Đã tìm được cách lấy token (hầu như) full quyền (UPDATE: Không còn full quyền)
   - Mọi người làm theo hướng dẫn trong link [Này](https://alotoi.com/get-token-full-quyen/#Cach_1_Get_token_qua_ung_dung_Instagram) nhé
   - Cách này khó làm bookmark quá nên mọi người chịu khó làm bằng tay nhé :))
   - Lấy token cũng làm 1 lần rồi là xong mà :)) khi nào không dùng được nữa mới phải lấy lại.
 
-- **FIX**(08/11/2021)
+- **FIX** (08/11/2021)
   - Sau khi fb cập nhật thì bookmark lấy accesstoken đã không còn dùng được nữa, do fb đã giấu mất accesstoken.
   - Do đó mình đã tạo 1 bookmark mới "Lấy access token (có thời hạn. app token)"
   - Cách lấy này chỉ lấy được token dạng app token, không full quyền như user token cũ
   - Nên có thể vài chức năng sẽ không hoạt động được *(chức năng tải ảnh/video trên tường đối tượng)*
   - Mình sẽ tìm cách để fix lỗi này và cập nhật nhanh nhất có thể
 
-- **Update**(20/10/2021):
+- **Update** (20/10/2021):
 
   - Chức năng tải ảnh với độ phân giải GỐC:
   - ![](./screenshots/13.png)
@@ -44,7 +51,7 @@
       - => Các bạn chỉ cần login lại và lấy access token mới là tải được tiếp
     - Để giảm tỷ lệ bị ban, hãy tăng thời gian chờ ở biến WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO trong file [config.js](./config.js) nhé
 
-- **Update**(03/10/2021):
+- **Update** (03/10/2021):
 
   - Giao diện tiếng việt có dấu.
   - Tải từng hình/video. Tải liên tiếp chứ ko tải song song như cũ
@@ -52,13 +59,13 @@
     - Nhưng tỉ lệ lỗi sẽ thấp hơn đáng kể, tải file nào xong file đó.
   - Thu gọn README
 
-- **Update**(21/09/2021):
+- **Update** (21/09/2021):
 
   - Có thêm chức năng **tải album tại vị trí bất kỳ** (không nhất thiết là từ đầu album tới cuối album). Dành cho trường hợp bạn tải được 1 nửa album rồi mà bị rớt mạng hoặc lỗi. Thì chỉ cần mở lại rồi tải từ vị trí ảnh tải được gần nhất là xong.
   - Giao diện tiếng việt (không dấu)
   - ![UI](./screenshots/11.png)
 
-- **Update**(19/09/2021):
+- **Update** (19/09/2021):
   - Tool có thêm chức năng tải tất cả ảnh/video trên tường của 1 đối tượng (user/group/page)
 
 </details> <br/>
