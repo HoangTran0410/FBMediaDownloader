@@ -6,6 +6,8 @@ import {
   fetchAlbumInfo,
 } from "./download_album.js";
 import { fetchTimeLineAlbumId_FBPage } from "./download_timeline_album.js";
+import { downloadUserPhotos } from "./download_user_photos.js";
+import { downloadUserVideos } from "./download_user_videos.js";
 import {
   downloadWallMedia,
   downloadWallMediaLinks,
@@ -141,6 +143,47 @@ const menuDownloadWallMedia = async () => {
   }
 };
 
+const menuDownloadPhotoVideoOfUser = async () => {
+  while (true) {
+    const action = await choose(
+      "FB Media Downloader Tool > Tải toàn bộ ảnh/video của user",
+      {
+        0: "<- Quay lại",
+        1: "Tải toàn bộ Ảnh được đăng bởi user",
+        2: "Tải toàn bộ Video được đăng bởi user",
+      }
+    );
+
+    if (action.key == 0) break;
+    if (action.key == 1 || action.key == 2) {
+      const target_id = await prompt(
+        "> Nhập id của user (Nhập -1 để quay lại): "
+      );
+      if (target_id != -1) {
+        const from_cursor = await prompt(
+          "> Tải từ trang nào (Nhập id trang. Nhập 0 để tải từ trang đầu): "
+        );
+        const page_limit = await prompt(
+          "> Tải bao nhiêu trang (Nhập 0 để tải tới khi hết): "
+        );
+        if (page_limit >= 0) {
+          action.key == 1
+            ? await downloadUserPhotos({
+                targetId: target_id,
+                fromCursor: from_cursor == 0 ? null : from_cursor,
+                pageLimit: page_limit == 0 ? Infinity : page_limit,
+              })
+            : await downloadUserVideos({
+                targetId: target_id,
+                fromCursor: from_cursor == 0 ? null : from_cursor,
+                pageLimit: page_limit == 0 ? Infinity : page_limit,
+              });
+        }
+      }
+    }
+  }
+};
+
 export const menu = async () => {
   while (true) {
     const action = await choose("FB Media Downloader Tool", {
@@ -148,8 +191,9 @@ export const menu = async () => {
       2: "Tìm timeline album id của page",
       3: "Tải album (của user/page/group)",
       4: "Tải ảnh/video trên tường của đối tượng (user/group/page)",
-      5: "Hỗ trợ",
-      6: "Thoát",
+      5: "Tải toàn bộ ảnh/video của user",
+      6: "Hỗ trợ",
+      7: "Thoát",
     });
     if (action.key == 1) {
       const album_id = await prompt("> Nhập album id (Nhập -1 để quay lại): ");
@@ -178,12 +222,15 @@ export const menu = async () => {
       await menuDownloadWallMedia();
     }
     if (action.key == 5) {
+      await menuDownloadPhotoVideoOfUser();
+    }
+    if (action.key == 6) {
       console.log(
         "---- Liên hệ mình để được hỗ trợ: https://www.facebook.com/99.hoangtran/ ----"
       );
       await wait_for_key_pressed();
     }
-    if (action.key == 6) break;
+    if (action.key == 7) break;
   }
 
   rl.close();

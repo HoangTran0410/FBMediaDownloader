@@ -65,7 +65,7 @@ export const download = (url, destination) =>
         });
       })
       .on("error", (error) => {
-        unlink(destination);
+        fs.unlinkSync(destination);
         reject(error.message);
       });
   });
