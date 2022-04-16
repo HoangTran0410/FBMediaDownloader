@@ -1,4 +1,5 @@
 import readline from "readline";
+import fs from "fs";
 import { S } from "./constants.js";
 import {
   downloadAlbumPhoto,
@@ -12,6 +13,7 @@ import {
   downloadWallMedia,
   downloadWallMediaLinks,
 } from "./download_wall_media.js";
+import { download, createIfNotExistDir } from "./utils.js";
 
 // https://stackoverflow.com/a/68504470
 const rl = readline.createInterface({
@@ -184,6 +186,41 @@ const menuDownloadPhotoVideoOfUser = async () => {
   }
 };
 
+const menuDownloadFromFile = async () => {
+  const file_path = await prompt(
+    "> Nhập đường dẫn file (Có thể kéo thả file vào đây): "
+  );
+
+  if (file_path) {
+    const folder_name = await prompt("> Nhập tên folder để lưu: ");
+    const folder_path = `downloads/from-file/${folder_name}/`;
+    createIfNotExistDir(folder_path);
+
+    try {
+      const content = fs.readFileSync(file_path, "utf8");
+      const urls = content.split("\n");
+
+      console.log(`Tìm thấy ${urls.length} links.`);
+
+      let index = 1;
+      for (let url of urls) {
+        try {
+          let isPhoto = url.indexOf(".jpg") > 0;
+          let fileName = `${folder_path}/${index}.${isPhoto ? "jpg" : "mp4"}`;
+
+          console.log(`Đang tải ${index}/${urls.length}`);
+          await download(url, fileName);
+          index++;
+        } catch (e) {
+          console.log(`[LỖI]: Lỗi khi tải. ${url}.`, e);
+        }
+      }
+    } catch (e) {
+      console.log("[LỖI]: ", e);
+    }
+  }
+};
+
 export const menu = async () => {
   while (true) {
     const action = await choose("FB Media Downloader Tool", {
@@ -192,8 +229,9 @@ export const menu = async () => {
       3: "Tải album (của user/page/group)",
       4: "Tải ảnh/video trên tường của đối tượng (user/group/page)",
       5: "[MỚI] Tải toàn bộ ảnh/video của user",
-      6: "Hỗ trợ",
-      7: "Thoát",
+      6: "[MỚI] Tải từ file chứa link (instagram)",
+      7: "Hỗ trợ",
+      8: "Thoát",
     });
     if (action.key == 1) {
       const album_id = await prompt("> Nhập album id (Nhập -1 để quay lại): ");
@@ -225,12 +263,15 @@ export const menu = async () => {
       await menuDownloadPhotoVideoOfUser();
     }
     if (action.key == 6) {
+      await menuDownloadFromFile();
+    }
+    if (action.key == 7) {
       console.log(
         "---- Liên hệ mình để được hỗ trợ: https://www.facebook.com/99.hoangtran/ ----"
       );
       await wait_for_key_pressed();
     }
-    if (action.key == 7) break;
+    if (action.key == 8) break;
   }
 
   rl.close();
