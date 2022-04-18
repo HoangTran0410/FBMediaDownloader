@@ -1,17 +1,26 @@
 # FB Media Downloader
 
-[Post FB](https://www.facebook.com/groups/j2team.community/posts/1665799000418880/) giới thiệu tool
+Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.community/posts/1665799000418880/)
 
 [Video hướng dẫn](https://youtu.be/g4zh9p-QfAQ)
 
-1 Tool nhỏ viết bằng Nodejs. Giúp:
+1 Tool nhỏ viết bằng Nodejs (kèm theo Bookmark hỗ trợ). Giúp:
 
 - Tải nhanh 1 album ảnh bất kì trên facebook, bạn chỉ cần có id của album ảnh đó là được.
-- Tải nhanh toàn bộ ảnh/video trên tường của 1 đối tượng (user/group/page)
-- Tải về đường link của các ảnh/video trên
+- Tải nhanh toàn bộ ảnh/video trên tường của 1 đối tượng (user/group/page).
+- Tải về đường link của các ảnh/video trên.
+- **(MỚI)** Tải về toàn bộ hình ảnh/video của người dùng instagram đăng trên tường của họ.
 
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
+
+- **UPDATE** (17/04/2022)
+  - Bài Post: [J2Team Community](https://www.facebook.com/groups/j2team.community/posts/1817757355223043/)
+  - Video demo: [Youtube](https://youtu.be/wLRtrdD5Gaw)
+  - Thêm bookmark mới cho instagram: Lấy toàn bộ link ảnh/video của người dùng instagram.
+  - Thêm chức năng mới: 
+    - Tải từ file chứa links. (Chức năng số 6).
+    - Chức năng này hỗ trợ cho bookmark instagram
 
 - **UPDATE** (27/03/2022)
   - Thêm chức năng mới: 
