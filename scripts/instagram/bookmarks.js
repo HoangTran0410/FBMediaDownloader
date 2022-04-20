@@ -52,16 +52,21 @@ javascript: (function () {
 })();
 
 // Tải tất cả ảnh trong profile 1 user - ver2 - using API
+// Sửa lỗi 20/4/2022 - đã tải được video
 javascript: (async function () {
   let user_id = prompt("Enter user id:", "");
   if (!user_id) return;
 
-  let getBiggestMediaFromNode = (node) => {
-    let r = node.display_resources;
-    return r[r.length - 1]?.src;
-  };
+  function getBiggestMediaFromNode(node) {
+    if (node.is_video) {
+      return getUniversalCdnUrl(node.video_url);
+    } else {
+      let r = node.display_resources;
+      return r[r.length - 1]?.src;
+    }
+  }
 
-  let download = (data, filename, type) => {
+  function download(data, filename, type) {
     var file = new Blob([data], { type: type });
     if (window.navigator.msSaveOrOpenBlob)
       window.navigator.msSaveOrOpenBlob(file, filename);
@@ -77,7 +82,13 @@ javascript: (async function () {
         window.URL.revokeObjectURL(url);
       }, 0);
     }
-  };
+  }
+
+  function getUniversalCdnUrl(cdnLink) {
+    const cdn = new URL(cdnLink);
+    cdn.host = "scontent.cdninstagram.com";
+    return cdn.href;
+  }
 
   let all_urls = [];
   let after = "";
