@@ -110,7 +110,7 @@ const getMediaFromAttachment = (attachment) => {
     } */
   if (type === "album") {
     // GỌI ĐỆ QUY VỚI TỪNG SUB_ATTACHMENT
-    attachment.subattachments.data.forEach((sub) => {
+    attachment?.subattachments?.data?.forEach((sub) => {
       filtered_media.push(...getMediaFromAttachment(sub));
     });
   }
