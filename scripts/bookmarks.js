@@ -134,6 +134,29 @@ javascript: (function () {
   );
 })();
 
+// Lấy UID từ url của user fb. Ví dụ: https://www.facebook.com/99.hoangtran
+javascript: (function () {
+  const getUid = async (url) => {
+    var response = await fetch(url);
+    if (response.status == 200) {
+      var text = await response.text();
+      let uid = /(?<=\"userID\"\:\")(.\d+?)(?=\")/.exec(text);
+      if (uid?.length) {
+        return uid[0];
+      }
+    }
+    return null;
+  };
+  const url = window.prompt("Nhập url của user fb:", "");
+  if (url)
+    getUid(url)
+      .then((uid) => {
+        if (uid) window.prompt(`UID của user ${url}:`, uid);
+        else alert("Không tìm thấy uid của user!");
+      })
+      .catch((err) => alert("Lỗi: " + err.message));
+})();
+
 // Lấy group id - trường hợp url của group hiển thị tên chứ ko hiển thị id. Ví dụ: https://www.facebook.com/groups/j2team.community.girls
 javascript: (function () {
   const group_name = document.title;
@@ -230,6 +253,80 @@ javascript: (function () {
     "Không tìm thấy PAGE ID nào trong url!\nBạn có đang ở đúng trang page fb chưa?\nTrang web Ví dụ:",
     "https://www.facebook.com/ColourfulSpace"
   );
+})();
+
+// Lấy tất cả uid từ trang facebook search bạn bè
+// Ví dụ: https://www.facebook.com/search/people/?q=*a&epa=FILTERS&filters=eyJmcmllbmRzIjoie1wibmFtZVwiOlwidXNlcnNfZnJpZW5kc19vZl9wZW9wbGVcIixcImFyZ3NcIjpcIjEwMDA2NDI2NzYzMjI0MlwifSJ9
+// Link trên được tạo từ web: https://sowsearch.info/
+javascript: (() => {
+  const getUid = async (url) => {
+    var response = await fetch(url);
+    if (response.status == 200) {
+      var text = await response.text();
+      let uid = /(?<=\"userID\"\:\")(.\d+?)(?=\")/.exec(text);
+      if (uid?.length) {
+        return uid[0];
+      }
+    }
+    return null;
+  };
+
+  const main = async () => {
+    alert("Đang lấy thông tin uid, mở console để xem tiến trình...");
+    let list_a = Array.from(
+      document.querySelectorAll(".sjgh65i0 a[role='presentation']")
+    );
+
+    let uids = [];
+    for (let a of list_a) {
+      let l = a.href;
+
+      let uid = l.split("profile.php?id=")[1];
+      if (uid) {
+        uids.push(uid);
+        console.log(uid);
+        continue;
+      }
+
+      let name = l.split("facebook.com/")[1];
+      uid = await getUid(l);
+      uids.push(uid);
+      console.log(name, uid);
+    }
+    console.log(uids);
+    window.prompt("Tất cả UID: ", uids.join("\n"));
+  };
+
+  main();
+})();
+
+// Scroll trang web xuống cuối cùng và chờ cho load thêm, tiếp tục scroll, cho tới khi ko còn dữ liệu mới
+javascript: (() => {
+  let height = () => document.body.scrollHeight;
+  let down = () =>
+    window.scrollTo({ left: 0, top: height(), behavior: "smooth" });
+  let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  (async () => {
+    let lastScroll = {
+      time: Date.now(),
+      top: 0,
+    };
+
+    while (true) {
+      down();
+
+      let currentHeight = height();
+      if (currentHeight != lastScroll.top) {
+        lastScroll.top = currentHeight;
+        lastScroll.time = Date.now();
+      } else if (Date.now() - lastScroll.time > 5000) {
+        break;
+      }
+      await sleep(100);
+    }
+    console.log("end");
+  })();
 })();
 
 // =====================================================================
