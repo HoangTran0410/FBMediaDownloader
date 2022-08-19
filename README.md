@@ -256,7 +256,7 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 </details>
 
 <details>
-<summary>LỖI có chữ *Oauth* gì đó khi tải ảnh/video</summary>
+<summary>LỖI có chữ *OAuthException* gì đó khi tải ảnh/video</summary>
 
 - Lý do: Có thể do token của bạn chưa đủ quyền, bạn nên thử các cách lấy token khác (hiện mình có 3 bookmarks, bạn cứ thử hết)
 - Hoặc dùng vài trang web lấy token trên mạng: [https://ffb.vn/get-token](https://ffb.vn/get-token) 
