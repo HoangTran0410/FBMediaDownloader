@@ -14,6 +14,11 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
+- **UPDATE (20/8/2022)**
+  - Cách lấy token mới, dùng web bên thứ 3 (nên dùng nick clone thôi, mình không đảm bảo cookie của bạn được an toàn đâu :)
+  - Link web: [https://ffb.vn/get-token](https://ffb.vn/get-token)
+
+
 - **UPDATE** (17/04/2022)
   - Bài Post: [J2Team Community](https://www.facebook.com/groups/j2team.community/posts/1817757355223043/)
   - Video demo: [Youtube](https://youtu.be/wLRtrdD5Gaw)
@@ -166,6 +171,10 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 
 Để có thể chạy tool thì bạn làm các bước sau:
 
+<details>
+
+<summary>Bấm vào đây để mở rộng</summary>
+
 0. Cài [NodeJS](https://nodejs.org/en/) (version 14 trở lên).
 
 1. Cài đặt các bookmark script mình đã cung cấp trong file [scripts/bookmarks.js](./scripts/bookmarks.js).
@@ -189,6 +198,9 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 7. Các file mà tool tải sẽ được lưu trong folder [downloads/](./downloads/) (các bạn có thể thay đổi vị trí lưu bằng cách chỉnh sửa trong file [config.js](./config.js))
 
 - ![downloads folder](./screenshots/5.png)
+
+</details>
+<br/>
 
 ## LINK NGON
 
@@ -240,5 +252,14 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 - => XỬ LÝ:
   - Cách 1: Cập nhật nodejs lên phiên bản cao hơn (>=14).
   - Cách 2: Nếu bạn dùng win 7 (hoặc thấp hơn) và cài không được nodejs 14 trở lên thì bạn tải và cài bản **.zip** thay vì bản .msi nhé. Chi tiết xem trong [Đây](https://github.com/nodejs/node/issues/33000#issuecomment-644530517)
+
+</details>
+
+<details>
+<summary>LỖI có chữ *Oauth* gì đó khi tải ảnh/video</summary>
+
+- Lý do: Có thể do token của bạn chưa đủ quyền, bạn nên thử các cách lấy token khác (hiện mình có 3 bookmarks, bạn cứ thử hết)
+- Hoặc dùng vài trang web lấy token trên mạng: [https://ffb.vn/get-token](https://ffb.vn/get-token) 
+- (*Lưu ý: mình không đảm bảo trang web này có bảo mật thông tin/cookies/token của các bạn hay không, nên hãy sử dụng cẩn trọng nhé, dùng cookie của nick clone thôi, đừng dùng nick chính*)
 
 </details>

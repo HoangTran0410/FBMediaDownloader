@@ -1,4 +1,9 @@
-// (MỚI) CẬP NHẬT CÁCH LẤY TOKEN FULL QUYỀN (01/03/2022):
+// (MỚI) CẬP NHẬT CÁCH LẤY TOKEN MỚI - DÙNG WEB HỖ TRỢ
+// https://ffb.vn/get-token
+// LƯU Ý: ĐÂY LÀ WEB BÊN THỨ 3, SỬ DỤNG COOKIES ĐỂ LẤY TOKEN, MÌNH KHÔNG ĐẢM BẢO COOKIES CỦA BẠN ĐƯỢC AN TOÀN :)
+
+// (CŨ) CẬP NHẬT CÁCH LẤY TOKEN FULL QUYỀN (01/03/2022):
+// (20/8/2022) TOKEN NÀY KHÔNG CÒN FULL QUYỀN
 javascript: (function () {
   if (window.location.host !== "business.facebook.com") {
     alert(
@@ -52,6 +57,7 @@ javascript: (function () {
 
 // (CŨ) Lấy access token (có thời hạn. app token) Dùng cho www.facebook.com
 // - HIỆN ĐANG LỖI: BOOKMARK này không toàn quyền, theo vài bạn test thử thì chức năng tải hình/video trên tường đối tượng không chạy được
+// (20/8/2022) TOKEN NÀY CÓ THỂ SỬ DỤNG ĐƯỢC MỘT VÀI CHỨC NĂNG
 javascript: (function () {
   if (window.location.host !== "www.facebook.com") {
     alert(
