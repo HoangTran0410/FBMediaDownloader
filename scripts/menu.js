@@ -14,6 +14,7 @@ import {
   downloadWallMediaLinks,
 } from "./download_wall_media.js";
 import { download, createIfNotExistDir } from "./utils.js";
+import { LANGKEY, setLang, t } from "./lang.js";
 
 // https://stackoverflow.com/a/68504470
 const rl = readline.createInterface({
@@ -23,8 +24,7 @@ const rl = readline.createInterface({
 const prompt = (query) =>
   new Promise((resolve) => rl.question(S.FgGreen + query + S.Reset, resolve));
 
-const wait_for_key_pressed = async () =>
-  await prompt("..Nhấn phím bất kỳ để tiếp tục..");
+const wait_for_key_pressed = async () => await prompt(t("pressAnyKey"));
 
 const choose = async (title, menu_items) => {
   let title_ui = `======== ${title} ========`;
@@ -38,14 +38,14 @@ const choose = async (title, menu_items) => {
   console.log(ui);
 
   while (true) {
-    const input = await prompt("\n> Chọn chức năng: ");
+    const input = await prompt("\n" + t("chooseFunction"));
     if (input in menu_items) {
       return {
         key: input,
         value: menu_items[input],
       };
     } else {
-      console.log("[!] Không hợp lệ. Vui lòng chọn lại.");
+      console.log(t("wrongChoice"));
     }
   }
 };
@@ -53,28 +53,24 @@ const choose = async (title, menu_items) => {
 // ========================================== MENU =========================================
 const menuDownloadAlbum = async () => {
   while (true) {
-    const action = await choose("FB Media Downloader Tool > Tải Album", {
-      0: "<- Quay lại",
-      1: "Tải tất cả ẢNH trong album",
-      2: "Tải tất cả LINK của ảnh trong album",
+    const action = await choose(t("downAlbumTitle"), {
+      0: t("back"),
+      1: t("downloadAllImageInAlbum"),
+      2: t("downloadAllLinkInAlbum"),
     });
 
     if (action.key == 0) break;
     if (action.key == 1 || action.key == 2) {
-      const album_id = await prompt("> Nhập album id (Nhập -1 để quay lại): ");
+      const album_id = await prompt(t("enterAlbumID"));
       if (album_id != -1) {
-        const from_photo_id_text = await prompt(
-          "> Tải từ vị trí id ảnh nào? (Nhập 0 để tải từ đầu album): "
-        );
-        const largest_photo = await prompt(
-          "> Tải ảnh chất lượng cao nhất? (0-Không, 1-Có): "
-        );
+        const from_photo_id_text = await prompt(t("enterStartPhotoID"));
+        const largest_photo = await prompt(t("downloadHD"));
         const from_photo_id =
           from_photo_id_text == "0" ? null : from_photo_id_text;
         const is_largest_photo = largest_photo == "0" ? false : true;
 
         if (action.key == 2 && is_largest_photo) {
-          console.log(`[!] Lưu LINK ảnh chất lương cao hiện chưa hỗ trợ.`);
+          console.log(t("saveHDLinkNotSupported"));
         }
 
         action.key == 1
@@ -95,35 +91,24 @@ const menuDownloadAlbum = async () => {
 
 const menuDownloadWallMedia = async () => {
   while (true) {
-    const action = await choose(
-      "FB Media Downloader Tool > Tải ảnh/video trên tường",
-      {
-        0: "<- Quay lại",
-        1: "Tải tất cả ẢNH/VIDEO trên tường của đối tượng (user/gorup/page)",
-        2: "Tải tất cả LINK ảnh/video trên tường của đối tượng (user/group/page)",
-      }
-    );
+    const action = await choose(t("downloadWallTitle"), {
+      0: t("back"),
+      1: t("downloadAllMediaInWall"),
+      2: t("donwloadAllMediaLinkWall"),
+    });
 
     if (action.key == 0) break;
     if (action.key == 1 || action.key == 2) {
-      const target_id = await prompt(
-        "> Nhập id của đối tượng (user_id/group_id/page_id) (Nhập -1 để quay lại): "
-      );
+      const target_id = await prompt(t("enterTargetID"));
       if (target_id != -1) {
-        const page_limit = await prompt(
-          "> Tải bao nhiêu trang (Nhập 0 để tải mọi thứ trên tường): "
-        );
+        const page_limit = await prompt(t("howManyPageWall"));
         if (page_limit >= 0) {
-          const include_video = await prompt(
-            "> Có tải cả video không (0-Không, 1-Có): "
-          );
-          const largest_photo = await prompt(
-            "> Tải ảnh chất lượng cao nhất? (0-Không, 1-Có): "
-          );
+          const include_video = await prompt(t("downloadVideoWall"));
+          const largest_photo = await prompt(t("downloadHDWall"));
           const is_largest_photo = largest_photo == "0" ? false : true;
 
           if (action.key == 2 && is_largest_photo) {
-            console.log(`[!] Lưu LINK ảnh chất lương cao hiện chưa hỗ trợ.`);
+            console.log(t("saveHDLinkNotSupported"));
           }
 
           action.key == 1
@@ -147,27 +132,18 @@ const menuDownloadWallMedia = async () => {
 
 const menuDownloadPhotoVideoOfUser = async () => {
   while (true) {
-    const action = await choose(
-      "FB Media Downloader Tool > Tải toàn bộ ảnh/video của user",
-      {
-        0: "<- Quay lại",
-        1: "Tải toàn bộ Ảnh được đăng bởi user",
-        2: "Tải toàn bộ Video được đăng bởi user",
-      }
-    );
+    const action = await choose(t("downloadUserTitle"), {
+      0: t("back"),
+      1: t("downloadUserImagePost"),
+      2: t("downloadUserVideoPost"),
+    });
 
     if (action.key == 0) break;
     if (action.key == 1 || action.key == 2) {
-      const target_id = await prompt(
-        "> Nhập id của user (Nhập -1 để quay lại): "
-      );
+      const target_id = await prompt(t("enterUserID"));
       if (target_id != -1) {
-        const from_cursor = await prompt(
-          "> Tải từ trang nào (Nhập id trang. Nhập 0 để tải từ trang đầu): "
-        );
-        const page_limit = await prompt(
-          "> Tải bao nhiêu trang (Nhập 0 để tải tới khi hết): "
-        );
+        const from_cursor = await prompt(t("startPageUser"));
+        const page_limit = await prompt(t("howManyPageUser"));
         if (page_limit >= 0) {
           action.key == 1
             ? await downloadUserPhotos({
@@ -187,12 +163,10 @@ const menuDownloadPhotoVideoOfUser = async () => {
 };
 
 const menuDownloadFromFile = async () => {
-  const file_path = await prompt(
-    "> Nhập đường dẫn file (Có thể kéo thả file vào đây): "
-  );
+  const file_path = await prompt(t("enterFilePath"));
 
   if (file_path) {
-    const folder_name = await prompt("> Nhập tên folder để lưu: ");
+    const folder_name = await prompt(t("folderToSave"));
     const folder_path = `downloads/from-file/${folder_name}/`;
     createIfNotExistDir(folder_path);
 
@@ -200,7 +174,7 @@ const menuDownloadFromFile = async () => {
       const content = fs.readFileSync(file_path, "utf8");
       const urls = content.split("\n");
 
-      console.log(`Tìm thấy ${urls.length} links.`);
+      console.log(t("foundLinks").replace("{length}", urls.length));
 
       let index = 1;
       for (let url of urls) {
@@ -208,48 +182,67 @@ const menuDownloadFromFile = async () => {
           let isPhoto = url.indexOf(".jpg") > 0;
           let fileName = `${folder_path}/${index}.${isPhoto ? "jpg" : "mp4"}`;
 
-          console.log(`Đang tải ${index}/${urls.length}`);
+          console.log(
+            t("downloadingLinks").replace(
+              "{progress}",
+              `${index}/${urls.length}`
+            )
+          );
           await download(url, fileName);
           index++;
         } catch (e) {
-          console.log(`[LỖI]: Lỗi khi tải. ${url}.`, e);
+          console.log(t("errorWhenDownloadUrl").replace("{url}", url), e);
         }
       }
     } catch (e) {
-      console.log("[LỖI]: ", e);
+      console.log(t("error"), e);
     }
+  }
+};
+
+const menuSelectLanguage = async () => {
+  const action = await choose("Ngôn ngữ / Select Language", {
+    1: "Tiếng Việt",
+    2: "English",
+  });
+
+  if (action.key == 1) {
+    setLang(LANGKEY.vi);
+  }
+  if (action.key == 2) {
+    setLang(LANGKEY.en);
   }
 };
 
 export const menu = async () => {
   while (true) {
     const action = await choose("FB Media Downloader Tool", {
-      1: "Xem thông tin album",
-      2: "Tìm timeline album id của page",
-      3: "Tải album (của user/page/group)",
-      4: "Tải ảnh/video trên tường của đối tượng (user/group/page)",
-      5: "[MỚI] Tải toàn bộ ảnh/video của user",
-      6: "[MỚI] Tải từ file chứa link (instagram)",
-      7: "Hỗ trợ",
-      8: "Thoát",
+      1: t("albumInfo"),
+      2: t("findTimelinkAlbum"),
+      3: t("downloadAlbum"),
+      4: t("downloadWall"),
+      5: t("downloadUser"),
+      6: t("downloadFromUrlFile"),
+      7: t("language"),
+      8: t("help"),
+      9: t("exit"),
     });
     if (action.key == 1) {
-      const album_id = await prompt("> Nhập album id (Nhập -1 để quay lại): ");
+      const album_id = await prompt(t("enterAlbumID"));
       if (album_id != -1) {
         console.log(await fetchAlbumInfo(album_id));
         await wait_for_key_pressed();
       }
     }
     if (action.key == 2) {
-      const page_id = await prompt("> Nhập page id (Nhập -1 để quay lại): ");
+      const page_id = await prompt(t("enterPageID"));
       if (page_id != -1) {
         const timeline_album_id = await fetchTimeLineAlbumId_FBPage(page_id);
         if (timeline_album_id) {
-          console.log("< TÌM THẤY Timeline Album ID: ", timeline_album_id);
-          console.log("< Đang tải thông tin album....");
+          console.log(t("foundTimelineAlbumID"), timeline_album_id);
+          console.log(t("fetchingAlbumInfo"));
           console.log(await fetchAlbumInfo(timeline_album_id));
-        } else
-          console.log(S.BgRed + "< KHÔNG TÌM THẤY timeline album." + S.Reset);
+        } else console.log(S.BgRed + t("notFoundTimlineAlbum") + S.Reset);
         await wait_for_key_pressed();
       }
     }
@@ -266,12 +259,13 @@ export const menu = async () => {
       await menuDownloadFromFile();
     }
     if (action.key == 7) {
-      console.log(
-        "---- Liên hệ mình để được hỗ trợ: https://www.facebook.com/99.hoangtran/ ----"
-      );
+      await menuSelectLanguage();
+    }
+    if (action.key == 8) {
+      console.log(t("contact"));
       await wait_for_key_pressed();
     }
-    if (action.key == 8) break;
+    if (action.key == 9) break;
   }
 
   rl.close();

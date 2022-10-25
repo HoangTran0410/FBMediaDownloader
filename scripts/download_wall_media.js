@@ -18,6 +18,7 @@ import {
   saveToFile,
   sleep,
 } from "./utils.js";
+import { t } from "./lang.js";
 
 // Lấy ra các thông tin cần thiết (id, ảnh, video) từ dữ liệu attachment.
 const getMediaFromAttachment = (attachment) => {
@@ -130,7 +131,7 @@ const fetchWallMedia = async ({
   let url = `${FB_API_HOST}/${targetId}/feed?fields=attachments{media,type,subattachments,target}&access_token=${ACCESS_TOKEN}`;
 
   while (url && page <= pageLimit) {
-    console.log(`ĐANG TẢI TRANG ${page}...`);
+    console.log(t("downloadingPage").replace("{page}", page));
     const fetchData = await myFetch(url);
     page++;
 
@@ -145,7 +146,9 @@ const fetchWallMedia = async ({
 
       all_media.push(...media);
       console.log(
-        `> TÌM THẤY ${media.length} file ảnh/video. (TỔNG: ${all_media.length})`
+        t("foundWallMedia")
+          .replace("{length}", media.length)
+          .replace("{total}", all_media.length)
       );
 
       // callback when each page fetched
@@ -156,7 +159,7 @@ const fetchWallMedia = async ({
 
       // wait for next fetch - if needed
       if (WAIT_BEFORE_NEXT_FETCH) {
-        console.log(`ĐANG TẠM DỪNG ${WAIT_BEFORE_NEXT_FETCH}ms...`);
+        console.log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
         await sleep(WAIT_BEFORE_NEXT_FETCH);
       }
     } else {
@@ -174,7 +177,7 @@ export const downloadWallMediaLinks = async ({
   pageLimit = Infinity,
   isGetLargestPhoto = false,
 }) => {
-  console.log(`ĐANG TẢI DỮ LIỆU TRÊN TƯỜNG CỦA ${targetId}...`);
+  console.log(t("gettingWallInfo").replace("{id}", targetId));
 
   const fileName = `${FOLDER_TO_SAVE_LINKS}/${targetId}.txt`;
   deleteFile(fileName); // delete if file exist
@@ -187,7 +190,7 @@ export const downloadWallMediaLinks = async ({
         media = media.filter((m) => m.type !== MEDIA_TYPE.VIDEO);
 
       if (isGetLargestPhoto) {
-        // TODO get largest photo link 
+        // TODO get largest photo link
       }
 
       saveToFile(
@@ -206,7 +209,7 @@ export const downloadWallMedia = async ({
   pageLimit = Infinity,
   isGetLargestPhoto = false,
 }) => {
-  console.log(`ĐANG TẢI DỮ LIỆU TRÊN TƯỜNG CỦA ${targetId}...`);
+  console.log(t("gettingWallInfo").replace("{id}", targetId));
   let saved = 0;
   await fetchWallMedia({
     targetId: targetId,
@@ -222,14 +225,12 @@ export const downloadWallMedia = async ({
 
         if (isGetLargestPhoto && media_type == MEDIA_TYPE.PHOTO) {
           await sleep(WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO);
-          console.log(
-            `Đang tìm ảnh có độ phân giải lớn nhất của ${media_id}...`
-          );
+          console.log(t("fetchingHDPhoto").replace("{media_id}", media_id));
           media_url = (await getLargestPhotoLink(media_id)) || media_url;
         }
 
         if (!includeVideo && media_type === MEDIA_TYPE.VIDEO) {
-          console.log(`Bỏ qua video: ${media_url}`);
+          console.log(t("skipVideo").replace("{url}", media_url));
           continue;
         }
 
@@ -240,12 +241,14 @@ export const downloadWallMedia = async ({
 
         const savePath = `${dir}/${media_id}.${file_format}`;
         try {
-          console.log(`Đang lưu ${saved}: ${savePath}...`);
+          console.log(
+            t("saving").replace("{count}", saved).replace("{path}", savePath)
+          );
           await download(media_url, savePath);
           saved++;
         } catch (e) {
           console.log(
-            S.BgRed + `[!] LỖI khi tải ${savePath}` + S.Reset,
+            S.BgRed + t("errorWhenSave").replace("{path}", savePath) + S.Reset,
             e.toString()
           );
         }

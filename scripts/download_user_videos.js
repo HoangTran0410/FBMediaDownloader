@@ -5,6 +5,7 @@ import {
   WAIT_BEFORE_NEXT_FETCH,
 } from "../config.js";
 import { FB_API_HOST, S } from "./constants.js";
+import { t } from "./lang.js";
 import { createIfNotExistDir, download, myFetch, sleep } from "./utils.js";
 
 const fetchUserVideos = async ({
@@ -22,7 +23,7 @@ const fetchUserVideos = async ({
   }
 
   while (url && page <= pageLimit) {
-    console.log(`ĐANG TẢI TRANG ${page}...`);
+    console.log(t("downloadingPage").replace("{page}", page));
     const fetchData = await myFetch(url);
     page++;
 
@@ -31,10 +32,12 @@ const fetchUserVideos = async ({
     const videos = fetchData.data;
     all_videos.push(...videos);
     console.log(
-      `> TÌM THẤY ${videos.length} videos. (TỔNG: ${all_videos.length})`
+      t("foundVideos")
+        .replace("{length}", videos.length)
+        .replace("{total}", all_videos.length)
     );
-    console.log(` > ID trang hiện tại: ${fetchData.paging?.cursors?.before}`);
-    console.log(` > ID trang sau: ${fetchData.paging?.cursors?.after}\n`);
+    console.log(t("currentPageID"), fetchData.paging?.cursors?.before);
+    console.log(t("nextPageID"), fetchData.paging?.cursors?.after, "\n");
 
     // callback when each page fetched
     await pageFetchedCallback(videos);
@@ -44,7 +47,7 @@ const fetchUserVideos = async ({
 
     // wait for next fetch - if needed
     if (WAIT_BEFORE_NEXT_FETCH) {
-      console.log(`ĐANG TẠM DỪNG ${WAIT_BEFORE_NEXT_FETCH}ms...`);
+      console.log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
       await sleep(WAIT_BEFORE_NEXT_FETCH);
     }
   }
@@ -57,7 +60,7 @@ export const downloadUserVideos = async ({
   fromCursor,
   pageLimit = Infinity,
 }) => {
-  console.log(`ĐANG TẢI VIDEOS CỦA USER ${targetId}...`);
+  console.log(t("downloadingUserVideo").replace("{user_id}", targetId));
   let saved = 0;
 
   await fetchUserVideos({
@@ -89,12 +92,17 @@ export const downloadUserVideos = async ({
             ` [${~~length}s]` +
             (description ? ` [${description}]` : "");
 
-          console.log(`Đang lưu ${saved}: ${savePath}... ${moreInfo}`);
+          console.log(
+            t("savingUserMedia")
+              .replace("{count}", saved)
+              .replace("{path}", savePath)
+              .replace("{moreInfo}", moreInfo)
+          );
           await download(url, savePath);
           saved++;
         } catch (e) {
           console.log(
-            S.BgRed + `[!] LỖI khi tải ${savePath}` + S.Reset,
+            S.BgRed + t("errorWhenSave").replace("{path}", savePath) + S.Reset,
             e.toString()
           );
         }

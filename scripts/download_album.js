@@ -17,6 +17,7 @@ import {
   saveToFile,
   sleep,
 } from "./utils.js";
+import { t } from "./lang.js";
 
 // Hàm này fetch và trả về 2 thứ:
 // 1. Toàn bộ link ảnh (max 100) từ 1 vị trí (cursor) nhất định trong album ảnh. Định dạng: [[{id: .., url: ...}, ...]
@@ -53,7 +54,7 @@ const fetchAlbumPhotos = async ({
   let allImgsData = [];
 
   while (hasNextCursor && currentPage <= pageLimit) {
-    console.log(`ĐANG TẢI TRANG: ${currentPage}, Kích thước trang: 100 ảnh...`);
+    console.log(t("downloadingAlbum").replace("{page}", currentPage));
 
     const data = await fetchAlbumPhotosFromCursor({
       albumId,
@@ -66,7 +67,9 @@ const fetchAlbumPhotos = async ({
 
       console.log(
         S.BgGreen +
-          `> TÌM THẤY ${data.imgData.length} ẢNH. (TỔNG: ${allImgsData.length})` +
+          t("foundAlbumMedia")
+            .replace("{length}", data.imgData.length)
+            .replace("{total}", allImgsData.length) +
           S.Reset
       );
 
@@ -80,7 +83,7 @@ const fetchAlbumPhotos = async ({
 
       // wait for next fetch - if needed
       if (WAIT_BEFORE_NEXT_FETCH) {
-        console.log(`ĐANG TẠM DỪNG ${WAIT_BEFORE_NEXT_FETCH}ms...`);
+        console.log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
         await sleep(WAIT_BEFORE_NEXT_FETCH);
       }
     } else {
@@ -119,9 +122,11 @@ export const downloadAlbumPhotoLinks = async ({
   isGetLargestPhoto = false,
 }) => {
   const from_text = fromPhotoId
-    ? "vị trí photo_id=" + fromPhotoId
-    : "đầu album";
-  console.log(`ĐANG TẢI DỮ LIỆU ALBUM ${albumId} TỪ ${from_text}...`);
+    ? t("fromPhotoID") + fromPhotoId
+    : t("fromBeginAlbum");
+  console.log(
+    t("downloadAlbumFrom").replace("{albumId}", albumId) + `${from_text}...`
+  );
 
   const fileName = `${FOLDER_TO_SAVE_LINKS}/${albumId}.txt`;
   deleteFile(fileName); // delete if file exist
@@ -152,9 +157,11 @@ export const downloadAlbumPhoto = async ({
   isGetLargestPhoto = false,
 }) => {
   const from_text = fromPhotoId
-    ? "vị trí photo_id=" + fromPhotoId
-    : "đầu album";
-  console.log(`ĐANG TẢI DỮ LIỆU ALBUM ${albumId} TỪ ${from_text}...`);
+    ? t("fromPhotoID") + fromPhotoId
+    : t("fromBeginAlbum");
+  console.log(
+    t("downloadAlbumFrom").replace("{albumId}", albumId) + `${from_text}...`
+  );
   let saved = 0;
   await fetchAlbumPhotos({
     albumId,
@@ -170,20 +177,20 @@ export const downloadAlbumPhoto = async ({
 
         if (isGetLargestPhoto) {
           await sleep(WAIT_BEFORE_NEXT_FETCH_LARGEST_PHOTO);
-          console.log(
-            `Đang tìm ảnh có độ phân giải lớn nhất của ${photo_id}...`
-          );
+          console.log(t("fetchingHDPhoto").replace("media_id", photo_id));
           photo_url = (await getLargestPhotoLink(photo_id)) || photo_url;
         }
 
         const savePath = `${dir}/${photo_id}.${PHOTO_FILE_FORMAT}`;
         try {
-          console.log(`Đang lưu ${saved}: ${savePath}...`);
+          console.log(
+            t("saving").replace("{count}", saved).replace("{path}", savePath)
+          );
           await download(photo_url, savePath);
           saved++;
         } catch (e) {
           console.log(
-            S.BgRed + `[!] LỖI khi tải ảnh ${savePath}` + S.Reset,
+            S.BgRed + t("errorWhenSave").replace("{path}", savePath) + S.Reset,
             e.toString()
           );
         }
