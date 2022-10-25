@@ -10,47 +10,58 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 - Tải nhanh toàn bộ ảnh/video trên tường của 1 đối tượng (user/group/page).
 - Tải về đường link của các ảnh/video trên.
 - **(MỚI)** Tải về toàn bộ hình ảnh/video của người dùng instagram đăng trên tường của họ.
+- **(MỚI)** Đa ngôn ngữ (Tiếng anh/Tiếng việt) - Multilanguage (English/Vietnamese)
 
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
 
+- **UPDATE (26/10/2022)**
+
+  - Thêm ngôn ngữ Tiếng anh
+
+
 - **UPDATE (20/8/2022)**
+
   - Cách lấy token mới, dùng web bên thứ 3 (nên dùng nick clone thôi, mình không đảm bảo cookie của bạn được an toàn đâu :)
   - Link web: [https://ffb.vn/get-token](https://ffb.vn/get-token)
 
-
 - **UPDATE** (17/04/2022)
+
   - Bài Post: [J2Team Community](https://www.facebook.com/groups/j2team.community/posts/1817757355223043/)
   - Video demo: [Youtube](https://youtu.be/wLRtrdD5Gaw)
   - Thêm bookmark mới cho instagram: Lấy toàn bộ link ảnh/video của người dùng instagram.
-  - Thêm chức năng mới: 
+  - Thêm chức năng mới:
     - Tải từ file chứa links. (Chức năng số 6).
     - Chức năng này hỗ trợ cho bookmark instagram
 
 - **UPDATE** (27/03/2022)
-  - Thêm chức năng mới: 
+
+  - Thêm chức năng mới:
     - Tải toàn bộ/một phần ảnh/video từ user. (Chức năng số 5).
     - Chức năng này dành cho bạn nào muốn tải ảnh/video từ user. Chưa hỗ trợ group, page.
     - Hỗ trợ tải từ vị trí ảnh bất kỳ (Nếu có lỗi thì tải tiếp, ko cần tải lại từ đầu).
   - Fix vài lỗi nhỏ.
 
 - **UPDATE** (01/03/2022)
+
   - Đã tìm được cách lấy token full quyền. Các bạn vào file bookmarks.js để lấy nhé, ngay đầu file luôn. Mong fb sẽ không fix :)
   - Nếu bị fix thì có những cách khác các bạn có thể thử:
     - Mua acc clone => sẽ có token full quyền
     - Tool log giả lập android
 
 - **FIX** (12/11/2021)
+
   - Đã tìm được cách lấy token (hầu như) full quyền (UPDATE: Không còn full quyền)
   - Mọi người làm theo hướng dẫn trong link [Này](https://alotoi.com/get-token-full-quyen/#Cach_1_Get_token_qua_ung_dung_Instagram) nhé
   - Cách này khó làm bookmark quá nên mọi người chịu khó làm bằng tay nhé :))
   - Lấy token cũng làm 1 lần rồi là xong mà :)) khi nào không dùng được nữa mới phải lấy lại.
 
 - **FIX** (08/11/2021)
+
   - Sau khi fb cập nhật thì bookmark lấy accesstoken đã không còn dùng được nữa, do fb đã giấu mất accesstoken.
   - Do đó mình đã tạo 1 bookmark mới "Lấy access token (có thời hạn. app token)"
   - Cách lấy này chỉ lấy được token dạng app token, không full quyền như user token cũ
-  - Nên có thể vài chức năng sẽ không hoạt động được *(chức năng tải ảnh/video trên tường đối tượng)*
+  - Nên có thể vài chức năng sẽ không hoạt động được _(chức năng tải ảnh/video trên tường đối tượng)_
   - Mình sẽ tìm cách để fix lỗi này và cập nhật nhanh nhất có thể
 
 - **Update** (20/10/2021):
@@ -163,7 +174,7 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 
 ## Demo
 
-[Video hướng dẫn + demo](https://youtu.be/g4zh9p-QfAQ) 
+[Video hướng dẫn + demo](https://youtu.be/g4zh9p-QfAQ)
 
 **Lưu ý:** Trong video thì mình đã cài sẵn nodejs rồi, nên sẽ không huớng dẫn cách cài nữa nhé.
 
@@ -259,7 +270,7 @@ Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/boo
 <summary>LỖI có chữ *OAuthException* gì đó khi tải ảnh/video</summary>
 
 - Lý do: Có thể do token của bạn chưa đủ quyền, bạn nên thử các cách lấy token khác (hiện mình có 3 bookmarks, bạn cứ thử hết)
-- Hoặc dùng vài trang web lấy token trên mạng: [https://ffb.vn/get-token](https://ffb.vn/get-token) 
-- (*Lưu ý: mình không đảm bảo trang web này có bảo mật thông tin/cookies/token của các bạn hay không, nên hãy sử dụng cẩn trọng nhé, dùng cookie của nick clone thôi, đừng dùng nick chính*)
+- Hoặc dùng vài trang web lấy token trên mạng: [https://ffb.vn/get-token](https://ffb.vn/get-token)
+- (_Lưu ý: mình không đảm bảo trang web này có bảo mật thông tin/cookies/token của các bạn hay không, nên hãy sử dụng cẩn trọng nhé, dùng cookie của nick clone thôi, đừng dùng nick chính_)
 
 </details>
