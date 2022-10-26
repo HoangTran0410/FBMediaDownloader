@@ -1,5 +1,7 @@
 # FB Media Downloader
 
+Donate? Muốn hỗ trợ mình 1 ly cafe <3 [Donate here](https://github.com/HoangTran0410/HoangTran0410/blob/main/DONATE.md)
+
 Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.community/posts/1665799000418880/)
 
 [Video hướng dẫn](https://youtu.be/g4zh9p-QfAQ)
