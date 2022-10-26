@@ -6,6 +6,7 @@ import {
 } from "../config.js";
 import { FB_API_HOST, S } from "./constants.js";
 import { t } from "./lang.js";
+import { log } from "./logger.js";
 import { createIfNotExistDir, download, myFetch, sleep } from "./utils.js";
 
 const fetchUserVideos = async ({
@@ -23,7 +24,7 @@ const fetchUserVideos = async ({
   }
 
   while (url && page <= pageLimit) {
-    console.log(t("downloadingPage").replace("{page}", page));
+    log(t("downloadingPage").replace("{page}", page));
     const fetchData = await myFetch(url);
     page++;
 
@@ -31,13 +32,13 @@ const fetchUserVideos = async ({
 
     const videos = fetchData.data;
     all_videos.push(...videos);
-    console.log(
+    log(
       t("foundVideos")
         .replace("{length}", videos.length)
         .replace("{total}", all_videos.length)
     );
-    console.log(t("currentPageID"), fetchData.paging?.cursors?.before);
-    console.log(t("nextPageID"), fetchData.paging?.cursors?.after, "\n");
+    log(t("currentPageID"), fetchData.paging?.cursors?.before);
+    log(t("nextPageID"), fetchData.paging?.cursors?.after, "\n");
 
     // callback when each page fetched
     await pageFetchedCallback(videos);
@@ -47,7 +48,7 @@ const fetchUserVideos = async ({
 
     // wait for next fetch - if needed
     if (WAIT_BEFORE_NEXT_FETCH) {
-      console.log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
+      log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
       await sleep(WAIT_BEFORE_NEXT_FETCH);
     }
   }
@@ -60,7 +61,7 @@ export const downloadUserVideos = async ({
   fromCursor,
   pageLimit = Infinity,
 }) => {
-  console.log(t("downloadingUserVideo").replace("{user_id}", targetId));
+  log(t("downloadingUserVideo").replace("{user_id}", targetId));
   let saved = 0;
 
   await fetchUserVideos({
@@ -92,7 +93,7 @@ export const downloadUserVideos = async ({
             ` [${~~length}s]` +
             (description ? ` [${description}]` : "");
 
-          console.log(
+          log(
             t("savingUserMedia")
               .replace("{count}", saved)
               .replace("{path}", savePath)
@@ -101,7 +102,7 @@ export const downloadUserVideos = async ({
           await download(url, savePath);
           saved++;
         } catch (e) {
-          console.log(
+          log(
             S.BgRed + t("errorWhenSave").replace("{path}", savePath) + S.Reset,
             e.toString()
           );

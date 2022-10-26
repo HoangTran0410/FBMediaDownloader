@@ -6,6 +6,7 @@ import {
 } from "../config.js";
 import { FB_API_HOST, S } from "./constants.js";
 import { t } from "./lang.js";
+import { log } from "./logger.js";
 import { createIfNotExistDir, download, myFetch, sleep } from "./utils.js";
 
 const fetchUserPhotos = async ({
@@ -23,7 +24,7 @@ const fetchUserPhotos = async ({
   }
 
   while (url && page <= pageLimit) {
-    console.log(t("downloadingPage").replace("{page}", page));
+    log(t("downloadingPage").replace("{page}", page));
     const fetchData = await myFetch(url);
     page++;
 
@@ -31,11 +32,9 @@ const fetchUserPhotos = async ({
 
     const photos = fetchData.data;
     all_photos.push(...photos);
-    console.log(
-      `> TÌM THẤY ${photos.length} ảnh. (TỔNG: ${all_photos.length})`
-    );
-    console.log(t("currentPageID"), fetchData.paging?.cursors?.before);
-    console.log(t("nextPageID"), fetchData.paging?.cursors?.after, "\n");
+    log(`> TÌM THẤY ${photos.length} ảnh. (TỔNG: ${all_photos.length})`);
+    log(t("currentPageID"), fetchData.paging?.cursors?.before);
+    log(t("nextPageID"), fetchData.paging?.cursors?.after, "\n");
 
     // callback when each page fetched
     await pageFetchedCallback(photos);
@@ -45,7 +44,7 @@ const fetchUserPhotos = async ({
 
     // wait for next fetch - if needed
     if (WAIT_BEFORE_NEXT_FETCH) {
-      console.log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
+      log(t("pausing").replace("{ms}", WAIT_BEFORE_NEXT_FETCH));
       await sleep(WAIT_BEFORE_NEXT_FETCH);
     }
   }
@@ -58,7 +57,7 @@ export const downloadUserPhotos = async ({
   fromCursor,
   pageLimit = Infinity,
 }) => {
-  console.log(t("downloadingUserImage").replace("{user_id}", targetId));
+  log(t("downloadingUserImage").replace("{user_id}", targetId));
   let saved = 0;
 
   await fetchUserPhotos({
@@ -78,7 +77,7 @@ export const downloadUserPhotos = async ({
         try {
           const moreInfo = `[${album?.name}] [${name || ""}]`;
 
-          console.log(
+          log(
             t("savingUserMedia")
               .replace("{count}", saved)
               .replace("{path}", savePath)
@@ -87,7 +86,7 @@ export const downloadUserPhotos = async ({
           await download(largest_image.source, savePath);
           saved++;
         } catch (e) {
-          console.log(
+          log(
             S.BgRed + t("errorWhenSave").replace("{path}", savePath) + S.Reset,
             e.toString()
           );

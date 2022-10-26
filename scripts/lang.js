@@ -1,3 +1,5 @@
+import { log } from "./logger.js";
+
 export const LANGKEY = {
   vi: "vi",
   en: "en",
@@ -7,7 +9,7 @@ let currentLangKey = LANGKEY.vi;
 
 export const setLang = (langKey) => {
   if (langKey in LANGKEY) currentLangKey = langKey;
-  else console.log("ERROR. Not found lang " + langKey);
+  else log("ERROR. Not found lang " + langKey);
 };
 
 export const t = (key) => {

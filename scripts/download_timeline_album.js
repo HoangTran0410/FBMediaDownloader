@@ -10,6 +10,7 @@ import {
 } from "./download_album.js";
 import { myFetch } from "./utils.js";
 import { t } from "./lang.js";
+import { log } from "./logger.js";
 
 export const fetchTimeLineAlbumId_FBPage = async (page_id) => {
   // create link to fetch all albums of page
@@ -32,7 +33,7 @@ export const downloadTimeLineAlbumPhotoLinks_FBPage = async ({
 }) => {
   const album_id = await fetchTimeLineAlbumId_FBPage(page_id);
   if (album_id) {
-    console.log(t("foundTimelineAlbumID"), album_id);
+    log(t("foundTimelineAlbumID"), album_id);
     await downloadAlbumPhotoLinks({ albumId: album_id, fromPhotoId });
   } else {
     console.error(t("pageDontHaveTimelineAlbum"));
@@ -45,7 +46,7 @@ export const downloadTimeLineAlbum_FBPage = async ({
 }) => {
   const album_id = await fetchTimeLineAlbumId_FBPage(page_id);
   if (album_id) {
-    console.log(t("foundTimelineAlbumID"), album_id);
+    log(t("foundTimelineAlbumID"), album_id);
     await downloadAlbumPhoto({ albumId: album_id, fromPhotoId });
   } else {
     console.error(t("pageDontHaveTimelineAlbum"));

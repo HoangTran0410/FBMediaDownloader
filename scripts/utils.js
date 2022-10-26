@@ -3,6 +3,7 @@ import https from "https";
 import fs from "fs";
 import { FB_API_HOST } from "./constants.js";
 import { ACCESS_TOKEN } from "../config.js";
+import { log } from "./logger.js";
 
 // Dùng FB API lấy link hình ảnh có độ phân giải lớn nhất từ id ảnh truyền vào
 // Trả về undefined nếu không tìm thấy
@@ -17,12 +18,12 @@ export const myFetch = async (_url) => {
     const response = await fetch(_url);
     const json = await response.json();
     if (json.error) {
-      console.log("[!] ERROR", JSON.stringify(json, null, 4));
+      log("[!] ERROR", JSON.stringify(json, null, 4));
       return null;
     }
     return json;
   } catch (e) {
-    console.log("[!] ERROR", e.toString());
+    log("[!] ERROR", e.toString());
     return null;
   }
 };
@@ -41,14 +42,14 @@ export const deleteFile = (fileDir) =>
 export const createIfNotExistDir = (dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
-    console.log(`> Đã tạo thư mục ${dir}.`);
+    log(`> Đã tạo thư mục ${dir}.`);
   }
 };
 
 export const saveToFile = (fileName, data, override = false) => {
   try {
     fs.writeFileSync(fileName, data, { flag: override ? "w+" : "a+" });
-    console.log(`> Đã lưu vào file ${fileName}`);
+    log(`> Đã lưu vào file ${fileName}`);
   } catch (err) {
     console.error("[!] ERROR: ", err);
   }

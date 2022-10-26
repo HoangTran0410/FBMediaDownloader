@@ -15,6 +15,7 @@ import {
 } from "./download_wall_media.js";
 import { download, createIfNotExistDir } from "./utils.js";
 import { LANGKEY, setLang, t } from "./lang.js";
+import { log } from "./logger.js";
 
 // https://stackoverflow.com/a/68504470
 const rl = readline.createInterface({
@@ -35,7 +36,7 @@ const choose = async (title, menu_items) => {
   Object.entries(menu_items).map(([key, value], index) => {
     ui += `\n${key}: ${value}`;
   });
-  console.log(ui);
+  log(ui);
 
   while (true) {
     const input = await prompt("\n" + t("chooseFunction"));
@@ -45,7 +46,7 @@ const choose = async (title, menu_items) => {
         value: menu_items[input],
       };
     } else {
-      console.log(t("wrongChoice"));
+      log(t("wrongChoice"));
     }
   }
 };
@@ -70,7 +71,7 @@ const menuDownloadAlbum = async () => {
         const is_largest_photo = largest_photo == "0" ? false : true;
 
         if (action.key == 2 && is_largest_photo) {
-          console.log(t("saveHDLinkNotSupported"));
+          log(t("saveHDLinkNotSupported"));
         }
 
         action.key == 1
@@ -108,7 +109,7 @@ const menuDownloadWallMedia = async () => {
           const is_largest_photo = largest_photo == "0" ? false : true;
 
           if (action.key == 2 && is_largest_photo) {
-            console.log(t("saveHDLinkNotSupported"));
+            log(t("saveHDLinkNotSupported"));
           }
 
           action.key == 1
@@ -174,7 +175,7 @@ const menuDownloadFromFile = async () => {
       const content = fs.readFileSync(file_path, "utf8");
       const urls = content.split("\n");
 
-      console.log(t("foundLinks").replace("{length}", urls.length));
+      log(t("foundLinks").replace("{length}", urls.length));
 
       let index = 1;
       for (let url of urls) {
@@ -182,7 +183,7 @@ const menuDownloadFromFile = async () => {
           let isPhoto = url.indexOf(".jpg") > 0;
           let fileName = `${folder_path}/${index}.${isPhoto ? "jpg" : "mp4"}`;
 
-          console.log(
+          log(
             t("downloadingLinks").replace(
               "{progress}",
               `${index}/${urls.length}`
@@ -191,11 +192,11 @@ const menuDownloadFromFile = async () => {
           await download(url, fileName);
           index++;
         } catch (e) {
-          console.log(t("errorWhenDownloadUrl").replace("{url}", url), e);
+          log(t("errorWhenDownloadUrl").replace("{url}", url), e);
         }
       }
     } catch (e) {
-      console.log(t("error"), e);
+      log(t("error"), e);
     }
   }
 };
@@ -230,7 +231,7 @@ export const menu = async () => {
     if (action.key == 1) {
       const album_id = await prompt(t("enterAlbumID"));
       if (album_id != -1) {
-        console.log(await fetchAlbumInfo(album_id));
+        log(await fetchAlbumInfo(album_id));
         await wait_for_key_pressed();
       }
     }
@@ -239,10 +240,10 @@ export const menu = async () => {
       if (page_id != -1) {
         const timeline_album_id = await fetchTimeLineAlbumId_FBPage(page_id);
         if (timeline_album_id) {
-          console.log(t("foundTimelineAlbumID"), timeline_album_id);
-          console.log(t("fetchingAlbumInfo"));
-          console.log(await fetchAlbumInfo(timeline_album_id));
-        } else console.log(S.BgRed + t("notFoundTimlineAlbum") + S.Reset);
+          log(t("foundTimelineAlbumID"), timeline_album_id);
+          log(t("fetchingAlbumInfo"));
+          log(await fetchAlbumInfo(timeline_album_id));
+        } else log(S.BgRed + t("notFoundTimlineAlbum") + S.Reset);
         await wait_for_key_pressed();
       }
     }
@@ -262,7 +263,7 @@ export const menu = async () => {
       await menuSelectLanguage();
     }
     if (action.key == 8) {
-      console.log(t("contact"));
+      log(t("contact"));
       await wait_for_key_pressed();
     }
     if (action.key == 9) break;
