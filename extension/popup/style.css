@@ -1,0 +1,22 @@
+html,
+body {
+    min-width: 300px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    border: none;
+    margin: 0.25em;
+    padding: 0.75em 1em;
+    color: #333;
+    transition: all 200ms;
+}
+
+button:hover,
+button:focus {
+    background-color: rgb(150, 215, 255);
+    cursor: pointer;
+}
