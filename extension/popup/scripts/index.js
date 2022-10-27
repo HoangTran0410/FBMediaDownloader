@@ -1,7 +1,7 @@
 export const scripts = [
   {
     name: "Get Token (Business)",
-    file: "/popup/scripts/getTokenBussiness.js",
+    file: "/popup/scripts/getTokenBusiness.js",
   },
   {
     name: "Get Token (www.facebook.com)",
@@ -11,5 +11,4 @@ export const scripts = [
     name: "Get Token (m.facebook.com)",
     file: "/popup/scripts/getTokenMFacebook.js",
   },
-  { name: "Test" },
 ];
