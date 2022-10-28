@@ -2,7 +2,6 @@ import { downloadWatchingStory } from "./doutube/downloadWatchingStory.js";
 import { downloadWatchingVideo } from "./doutube/downloadWatchingVideo.js";
 import { enableDownloadVideo } from "./doutube/enableDownloadVideo.js";
 import { getAllVideoInUserProfile } from "./doutube/getAllVideoInUserProfile.js";
-
 import { downloadAlbumMedia } from "./facebook/downloadAlbumMedia.js";
 import { downloadCurrentVideo } from "./facebook/downloadCurrentVideo.js";
 import { getAlbumId } from "./facebook/getAlbumId.js";
@@ -20,23 +19,28 @@ import { getTokenFacebook } from "./facebook/getTokenFacebook.js";
 import { getTokenMFacebook } from "./facebook/getTokenMFacebook.js";
 import { getUid as getFbUid } from "./facebook/getUid.js";
 import { getUidFromUrl } from "./facebook/getUidFromUrl.js";
-
 import { github1s } from "./github/github1s.js";
 import { goToFirstCommit } from "./github/goToFirstCommit.js";
-
 import { getAllImagesInNewFeed } from "./instagram/getAllImagesInNewFeed.js";
 import { getAllImagesInUserProfile } from "./instagram/getAllImagesInUserProfile.js";
 import { getAllUserMedia } from "./instagram/getAllUserMedia.js";
 import { getToken as getTokenInsta } from "./instagram/getToken.js";
 import { getUid as getUidInsta } from "./instagram/getUid.js";
-
-import { darkModePDF } from "./more/darkModePDF.js";
+import { webToPDF } from "./pdf/webToPDF.js";
+import { darkModePDF } from "./pdf/darkModePDF.js";
+import { enableTextSelection } from "./unlock/enableTextSelection.js";
 import { openWaybackUrl } from "./more/openWaybackUrl.js";
-import { reEnableContextMenu } from "./more/reEnableContextMenu.js";
+import { reEnableContextMenu } from "./unlock/reEnableContextMenu.js";
 import { runStatJs } from "./more/runStatJs.js";
-import { scrollToVeryEnd } from "./more/scrollToVeryEnd.js";
+import { scrollToVeryEnd } from "./automation/scrollToVeryEnd.js";
 import { shortenURL } from "./more/shortenURL.js";
 import { viewScriptsUsed } from "./more/viewScriptsUsed.js";
+import { webToQRCode } from "./qrcode/webToQRCode.js";
+import { bugMeNot } from "./unlock/bugMeNot.js";
+import { textToQRCode } from "./qrcode/textToQRCode.js";
+import { viewHiddenPassword } from "./unlock/viewHiddenPassword.js";
+import { addSortTable } from "./table/addSortTable.js";
+import { addNumberColumn } from "./table/addNumberColumn.js";
 
 export const tabs = [
   {
@@ -208,8 +212,8 @@ export const tabs = [
     ],
   },
   {
-    id: "more",
-    name: "More...",
+    id: "pdf",
+    name: "PDF",
     description: "",
     scripts: [
       {
@@ -218,25 +222,101 @@ export const tabs = [
         func: darkModePDF,
       },
       {
+        name: "Web to PDF",
+        description: "Convert current website to PDF",
+        func: webToPDF,
+      },
+    ],
+  },
+  {
+    id: "qrcode",
+    name: "QR Code",
+    description: "",
+    scripts: [
+      {
+        name: "URL to QR Code",
+        description: "Convert current website URL to QR Code",
+        func: webToQRCode,
+      },
+      {
+        name: "Text to QR Code",
+        description: "Convert text to QR Code",
+        func: textToQRCode,
+      },
+    ],
+  },
+  {
+    id: "automation",
+    name: "Automation",
+    description: "",
+    scripts: [
+      {
         name: "Scroll to very end",
         description:
           "Scoll to end, then wait for load data, then scroll again...",
         func: scrollToVeryEnd,
       },
+    ],
+  },
+  {
+    id: "unlock",
+    name: "Unlock",
+    description: "",
+    scripts: [
       {
-        name: "Shorten URL (j2team)",
-        description: "Shorten URL using j2team.dev",
-        func: shortenURL,
+        name: "Bug me not",
+        description: "Get free account for current website",
+        func: bugMeNot,
       },
       {
-        name: "Open wayback url",
-        description: "Open wayback url for current website",
-        func: openWaybackUrl,
+        name: "View hidden passwords",
+        description: "View hidden password",
+        func: viewHiddenPassword,
+      },
+      {
+        name: "Re-Enable text selection",
+        description: "Enable text selection for website",
+        func: enableTextSelection,
       },
       {
         name: "Re-Enable context menu (right click)",
         description: "Enable context menu for website",
         func: reEnableContextMenu,
+      },
+    ],
+  },
+  {
+    id: "table",
+    name: "Table",
+    description: "",
+    scripts: [
+      {
+        name: "Add sort to table",
+        description: "Add sort functions to table",
+        func: addSortTable,
+      },
+      {
+        name: "Add number columns",
+        description: "Add number columns to table",
+        func: addNumberColumn,
+      },
+    ],
+  },
+  {
+    id: "more",
+    name: "More...",
+    description: "",
+    scripts: [
+      {
+        name: "Shorten URL (j2team)",
+        description: "Shorten URL using j2team.dev",
+        func: shortenURL,
+      },
+
+      {
+        name: "Open wayback url",
+        description: "Open wayback url for current website",
+        func: openWaybackUrl,
       },
       {
         name: "View scripts used in website",

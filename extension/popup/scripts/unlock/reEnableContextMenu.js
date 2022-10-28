@@ -5,4 +5,5 @@ export function reEnableContextMenu() {
   for (var id = 0; id < elements.length; ++id) {
     elements[id].oncontextmenu = null;
   }
+  alert("ReEnable context menu - Done");
 }
