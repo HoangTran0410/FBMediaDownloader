@@ -36,14 +36,28 @@ import { scrollToVeryEnd } from "./automation/scrollToVeryEnd.js";
 import { shortenURL } from "./more/shortenURL.js";
 import { viewScriptsUsed } from "./more/viewScriptsUsed.js";
 import { webToQRCode } from "./qrcode/webToQRCode.js";
-import { bugMeNot } from "./unlock/bugMeNot.js";
+import { bugMeNot } from "./password/bugMeNot.js";
 import { textToQRCode } from "./qrcode/textToQRCode.js";
-import { viewHiddenPassword } from "./unlock/viewHiddenPassword.js";
+import { viewHiddenPassword } from "./password/viewHiddenPassword.js";
 import { addSortTable } from "./table/addSortTable.js";
 import { addNumberColumn } from "./table/addNumberColumn.js";
 import { swapRowAndColumn } from "./table/swapRowAndColumn.js";
-import { editPage } from "./more/editPage.js";
-import { whatFont } from "./more/whatFont.js";
+import { editPage } from "./webUI/editPage.js";
+import { whatFont } from "./webUI/whatFont.js";
+import { listAllImagesInWeb } from "./more/listAllImagesInWeb.js";
+import { checkWebDie } from "./unlock/checkWebDie.js";
+import { removeColours } from "./webUI/removeColours.js";
+import { removeBloat } from "./webUI/removeBloat.js";
+import { removeStylesheet } from "./webUI/removeStylesheet.js";
+import { removeImages } from "./webUI/removeImages.js";
+import { removeCookies } from "./unlock/removeCookies.js";
+import { internalOrExternalLink } from "./webUI/internalOrExternalLink.js";
+import { viewStylesUsed } from "./more/viewStylesUsed.js";
+import { viewPartialSource } from "./more/viewPartialSource.js";
+import { letItSnow } from "./webUI/letItSnow.js";
+import { passwordGenerator } from "./password/passwordGenerator.js";
+import { bypassYoutube18 } from "./youtube/bypassYoutube18.js";
+import { getWindowSize } from "./webUI/getWindowSize.js";
 
 export const tabs = [
   {
@@ -171,6 +185,18 @@ export const tabs = [
     ],
   },
   {
+    id: "youtube",
+    name: "Youtube",
+    description: "",
+    scripts: [
+      {
+        name: "Bypass 18+ youtube video",
+        description: "Bypass Youtube Adult filter without Sign In",
+        func: bypassYoutube18,
+      },
+    ],
+  },
+  {
     id: "github",
     name: "Github",
     description: "",
@@ -262,19 +288,37 @@ export const tabs = [
     ],
   },
   {
-    id: "unlock",
-    name: "Unlock",
+    id: "password",
+    name: "Password",
     description: "",
     scripts: [
       {
-        name: "Bug me not",
-        description: "Get free account for current website",
+        name: "Password generator",
+        description:
+          "Generate unique password for website using master password",
+        func: passwordGenerator,
+      },
+      {
+        name: "Find shared login",
+        description: "Get free account from bugmenot",
         func: bugMeNot,
       },
       {
         name: "View hidden passwords",
         description: "View hidden password",
         func: viewHiddenPassword,
+      },
+    ],
+  },
+  {
+    id: "unlock",
+    name: "Unlock",
+    description: "",
+    scripts: [
+      {
+        name: "Remove cookies",
+        description: "Remove cookies from current website",
+        func: removeCookies,
       },
       {
         name: "Re-Enable text selection",
@@ -311,10 +355,15 @@ export const tabs = [
     ],
   },
   {
-    id: "more",
-    name: "More...",
+    id: "webui",
+    name: "Web UI",
     description: "",
     scripts: [
+      {
+        name: "Check web die",
+        description: "Check web die using downforeveryoneorjustme",
+        func: checkWebDie,
+      },
       {
         name: "Edit page",
         description: "Edit all text in website",
@@ -326,20 +375,78 @@ export const tabs = [
         func: whatFont,
       },
       {
+        name: "Remove all colors in web",
+        description: "Remove all colours in the web",
+        func: removeColours,
+      },
+      {
+        name: "Remove stylesheet",
+        description: "Remove all stylesheet from website",
+        func: removeStylesheet,
+      },
+      {
+        name: "Remove images",
+        description: "Remove all images from website",
+        func: removeImages,
+      },
+      {
+        name: "Remove bloat (ifram, embed)",
+        description: "Remove iframe, embeds, applets from website",
+        func: removeBloat,
+      },
+      {
+        name: "Highlight internal/external link",
+        description:
+          "Red = Internal_link / Orange = Currently_opened_link / Blue = External_link",
+        func: internalOrExternalLink,
+      },
+      {
+        name: "Get window size",
+        description:
+          "Alerts the width and height in pixels of the inner window.",
+        func: getWindowSize,
+      },
+      {
+        name: "Let it snow",
+        description: "Make website like it snowing",
+        func: letItSnow,
+      },
+    ],
+  },
+  {
+    id: "more",
+    name: "More...",
+    description: "",
+    scripts: [
+      {
         name: "Shorten URL (j2team)",
         description: "Shorten URL using j2team.dev",
         func: shortenURL,
       },
-
       {
-        name: "Open wayback url",
-        description: "Open wayback url for current website",
-        func: openWaybackUrl,
+        name: "View all images in web",
+        description: "View all images in web",
+        func: listAllImagesInWeb,
       },
       {
         name: "View scripts used in website",
         description: "View all scripts used in current website",
         func: viewScriptsUsed,
+      },
+      {
+        name: "View stylesheet used in website",
+        description: "View all stylesheet used in current website",
+        func: viewStylesUsed,
+      },
+      {
+        name: "View source code of selected area",
+        description: "Just select the area and use this bookmarklet",
+        func: viewPartialSource,
+      },
+      {
+        name: "Open wayback url",
+        description: "Open wayback url for current website",
+        func: openWaybackUrl,
       },
       {
         name: "Run Stat.js",
