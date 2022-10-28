@@ -41,6 +41,9 @@ import { textToQRCode } from "./qrcode/textToQRCode.js";
 import { viewHiddenPassword } from "./unlock/viewHiddenPassword.js";
 import { addSortTable } from "./table/addSortTable.js";
 import { addNumberColumn } from "./table/addNumberColumn.js";
+import { swapRowAndColumn } from "./table/swapRowAndColumn.js";
+import { editPage } from "./more/editPage.js";
+import { whatFont } from "./more/whatFont.js";
 
 export const tabs = [
   {
@@ -300,6 +303,11 @@ export const tabs = [
         description: "Add number columns to table",
         func: addNumberColumn,
       },
+      {
+        name: "Swap rows and columns",
+        description: "Swap rows and columns (transpose)",
+        func: swapRowAndColumn,
+      },
     ],
   },
   {
@@ -307,6 +315,16 @@ export const tabs = [
     name: "More...",
     description: "",
     scripts: [
+      {
+        name: "Edit page",
+        description: "Edit all text in website",
+        func: editPage,
+      },
+      {
+        name: "What font",
+        description: "Check font used in webpage",
+        func: whatFont,
+      },
       {
         name: "Shorten URL (j2team)",
         description: "Shorten URL using j2team.dev",
