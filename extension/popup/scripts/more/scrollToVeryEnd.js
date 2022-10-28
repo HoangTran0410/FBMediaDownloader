@@ -1,8 +1,7 @@
 // Scroll trang web xuống cuối cùng và chờ cho load thêm, tiếp tục scroll, cho tới khi ko còn dữ liệu mới
-(function () {
+export function scrollToVeryEnd() {
   let height = () => document.body.scrollHeight;
-  let down = () =>
-    window.scrollTo({ left: 0, top: height(), behavior: "smooth" });
+  let down = () => window.scrollTo({ left: 0, top: height() });
   let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   (async () => {
@@ -23,6 +22,6 @@
       }
       await sleep(100);
     }
-    console.log("end");
+    alert("scroll to very end DONE");
   })();
-})();
+}

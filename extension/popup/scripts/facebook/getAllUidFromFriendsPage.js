@@ -1,7 +1,7 @@
 // Lấy tất cả uid từ trang facebook search bạn bè
 // Ví dụ: https://www.facebook.com/search/people/?q=*a&epa=FILTERS&filters=eyJmcmllbmRzIjoie1wibmFtZVwiOlwidXNlcnNfZnJpZW5kc19vZl9wZW9wbGVcIixcImFyZ3NcIjpcIjEwMDA2NDI2NzYzMjI0MlwifSJ9
 // Link trên được tạo từ web: https://sowsearch.info/
-(async function () {
+export async function getAllUidFromFriendsPage() {
   const _getUidFromUrl = async (url) => {
     var response = await fetch(url);
     if (response.status == 200) {
@@ -36,4 +36,4 @@
   }
   console.log(uids);
   window.prompt("Tất cả UID: ", uids.join("\n"));
-})();
+}

@@ -1,5 +1,5 @@
 // Lấy UID từ url của user fb. Ví dụ: https://www.facebook.com/99.hoangtran
-(function () {
+export function getUidFromUrl() {
   const _getUidFromUrl = async (url) => {
     var response = await fetch(url);
     if (response.status == 200) {
@@ -19,4 +19,4 @@
         else alert("Không tìm thấy uid của user!");
       })
       .catch((err) => alert("Lỗi: " + err.message));
-})();
+}

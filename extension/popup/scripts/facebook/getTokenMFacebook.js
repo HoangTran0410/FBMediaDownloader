@@ -1,4 +1,4 @@
-javascript: (function () {
+export function getTokenMFacebook() {
   if (window.location.host !== "www.facebook.com") {
     alert(
       "Bookmark này chỉ dùng được trong trang www.facebook.com.\nBạn hãy vào trang www.facebook.com và ấn lại bookmark để lấy token nhé."
@@ -31,4 +31,4 @@ javascript: (function () {
       }
     }),
     http.send(params);
-})();
+}

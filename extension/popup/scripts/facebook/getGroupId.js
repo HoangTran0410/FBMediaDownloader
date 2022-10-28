@@ -1,5 +1,5 @@
 // Lấy group id - trường hợp url của group hiển thị tên chứ ko hiển thị id. Ví dụ: https://www.facebook.com/groups/j2team.community.girls
-(function () {
+export function getGroupId() {
   const group_name = document.title;
   const found = (check) => {
     if (check && check[0]) {
@@ -18,4 +18,4 @@
     "Không tìm thấy GROUP ID nào trong trang web!\nBạn có đang ở đúng trang group chưa?\nTrang web Ví dụ:",
     "https://www.facebook.com/groups/j2team.community.girls"
   );
-})();
+}

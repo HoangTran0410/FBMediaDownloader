@@ -1,5 +1,5 @@
 // Lấy timeline album id của page - khi đang trong trang của page fb. Ví dụ: https://www.facebook.com/profile.php?id=100057998562930
-(function () {
+export function getTimelineAlbumId() {
   const page_name = document.title;
   const list_a = document.querySelectorAll("a");
   for (let a of Array.from(list_a)) {
@@ -14,4 +14,4 @@
     "Không tìm thấy TIMELINE ALBUM trong trang web!\nBạn có đang ở đúng trang web của 1 Page fb chưa?\nThử kéo xuống tới bài post nào có kèm hình ảnh rồi ấn lại bookmark nhé\nTrang web Ví dụ: ",
     "https://www.facebook.com/profile.php?id=100057998562930"
   );
-})();
+}

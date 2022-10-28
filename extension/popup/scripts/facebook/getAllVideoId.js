@@ -1,5 +1,5 @@
 // Lấy tất cả video id có trong trang
-(function () {
+export function getAllVideoId() {
   const list_a = document.querySelectorAll("a");
   const list_id = [];
   for (let a of Array.from(list_a)) {
@@ -15,4 +15,4 @@
       "Không tìm thấy video id nào trong trang web!\nBạn có ở đúng trang video chưa?\nTrang web ví dụ:",
       "https://www.facebook.com/watch/?ref=tab"
     );
-})();
+}

@@ -1,5 +1,5 @@
 // Lấy user id (uid) - khi đang trong tường của người dùng muốn lấy user id. Ví dụ: https://www.facebook.com/callchoulnhe
-(function () {
+export function getUid() {
   const user_name = document.title;
   const found = (check) => {
     if (check && check[0]) {
@@ -25,4 +25,4 @@
     "Không tìm thấy USER ID nào trong trang web!\nBạn có đang ở đúng trang profile chưa?\nTrang web Ví dụ: ",
     "https://www.facebook.com/callchoulnhe"
   );
-})();
+}
