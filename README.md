@@ -13,6 +13,7 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 - Tải về đường link của các ảnh/video trên.
 - **(MỚI)** Tải về toàn bộ hình ảnh/video của người dùng instagram đăng trên tường của họ.
 - **(MỚI)** Đa ngôn ngữ (Tiếng anh/Tiếng việt) - Multilanguage (English/Vietnamese)
+- **(MỚI)** Không cần mất thời gian tự tạo bookmarks nữa, đã có [Extension mới](https://github.com/HoangTran0410/useful-script) giúp lấy id user/page/group, access token, ... nhanh hơn
 
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
