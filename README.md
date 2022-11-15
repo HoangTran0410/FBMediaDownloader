@@ -6,7 +6,7 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 
 [Video hướng dẫn](https://youtu.be/g4zh9p-QfAQ)
 
-1 Tool nhỏ viết bằng Nodejs (kèm theo Bookmark hỗ trợ). Giúp:
+1 Tool nhỏ viết bằng Nodejs <s>(kèm theo Bookmark hỗ trợ)</s> (***Cập nhật:** Bookmarks được di chuyển tới [Đây](https://github.com/HoangTran0410/useful-script)*). Giúp:
 
 - Tải nhanh 1 album ảnh bất kì trên facebook, bạn chỉ cần có id của album ảnh đó là được.
 - Tải nhanh toàn bộ ảnh/video trên tường của 1 đối tượng (user/group/page).
@@ -16,6 +16,10 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 
 <details>
 <summary>LỊCH SỬ CẬP NHẬT</summary>
+
+- **UPDATE (15/11/2022)**
+
+  - Tất cả Bookmarks hỗ trợ đã được tổng hợp tai extension mới [Useful-scripts](https://github.com/HoangTran0410/useful-script), từ giờ mọi người sử dụng extension cho tiện hơn, không cần tự tạo bookmarks nữa nhé.
 
 - **UPDATE (26/10/2022)**
 
@@ -109,7 +113,7 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 3. **Tải album bất kì**: _album của user, của group, hay của page đều chơi được tất_.
 4. **Tải tất cả ảnh/video** trên **tường** (wall) của 1 đối tượng **(user/group/page)**.
 
-Để có thể tải những thứ trên thì bạn chỉ cần truyền vào **album_id / user_id / group_id / page_id**. Để có thể **dễ dàng lấy** được những id này mình cũng đã viết sẵn các **bookmark scripts** cho các bạn sử dụng. Xem trong file [scripts/bookmarks.js](./scripts/bookmarks.js).
+Để có thể tải những thứ trên thì bạn chỉ cần truyền vào **album_id / user_id / group_id / page_id**. Để có thể **dễ dàng lấy** được những id này mình cũng đã viết sẵn các **bookmark scripts** cho các bạn sử dụng. <s>Xem trong file [scripts/bookmarks.js](./scripts/bookmarks.js)</s>. **Cập nhật, sử dụng extension mới dễ dàng hơn không cần tạo bookmarks [Extension tại đây](https://github.com/HoangTran0410/useful-script)**
 
 - ![bookmarks](./screenshots/2.png)
 
@@ -156,9 +160,9 @@ Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.com
 </details>
 
 <details>
-<summary>Cung cấp sẵn các bookmark hỗ trợ</summary>
+<summary><s>Cung cấp sẵn các bookmark hỗ trợ</s> Extension giúp lấy id nhanh hơn</summary>
 
-Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/bookmarks.js)), sẽ giúp các bạn dùng tool được dễ dàng hơn:
+<s>Mình viết sẵn những bookmark sau (trong file [bookmarks.js](./scripts/bookmarks.js))</s> Extension mới [Tại đây](https://github.com/HoangTran0410/useful-script), sẽ giúp các bạn dùng tool được dễ dàng hơn:
 
 - Bookmark lấy **Access Token**
 - Bookmark lấy **Album ID** - khi đang xem 1 album bất kỳ
