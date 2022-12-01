@@ -2,6 +2,24 @@
 
 Donate? Muốn hỗ trợ mình 1 ly cafe <3 [Donate here](https://github.com/HoangTran0410/HoangTran0410/blob/main/DONATE.md)
 
+## QUAN TRỌNG - NÊN ĐỌC
+
+Hiện tại mình đang trong quá trình tích hợp FBMediaDownlader vào [Extension Useful-script](https://github.com/HoangTran0410/useful-script)
+
+- Mình sẽ không code thêm chức năng mới cho tool này nữa.
+
+- Các chức năng đã có, và chức năng mới sẽ được cập nhật bên Extension nhé.
+
+- Sử dụng extension sẽ nhanh hơn, tiện hơn, không yêu cầu cài đặt phức tạp.
+
+- Sử dụng extension sẽ tải về file chứa các link ảnh. Các bạn chỉ cần đưa danh sách link đó vào các trình tải xuống như [IDM](https://www.internetdownloadmanager.com/) hoặc [FDM](https://www.freedownloadmanager.org/download.htm) là có thể tải hết ảnh về rồi.
+
+- Extension còn có rất nhiều chức năng khác (>100 chức năng) đợi mọi người trải nghiệm.
+
+- Tải extension ngay [Tại đây](https://github.com/HoangTran0410/useful-script)
+
+## Giới thiệu
+
 Bài post giới thiệu tool: [Post](https://www.facebook.com/groups/j2team.community/posts/1665799000418880/)
 
 [Video hướng dẫn](https://youtu.be/g4zh9p-QfAQ)
