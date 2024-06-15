@@ -25,7 +25,7 @@ import { log } from "./logger.js";
 // 2. Vị trí của ảnh tiếp theo (next cursor) (nếu có)
 const fetchAlbumPhotosFromCursor = async ({ albumId, cursor }) => {
   // create link to fetch
-  let url = `${FB_API_HOST}/${albumId}?fields=photos{largest_image}&access_token=${ACCESS_TOKEN}`;
+  let url = `${FB_API_HOST}/${albumId}/photos?fields=largest_image&limit=100&access_token=${ACCESS_TOKEN}`;
   if (cursor) url += `&after=${cursor}`;
 
   const json = await myFetch(url);
@@ -33,11 +33,8 @@ const fetchAlbumPhotosFromCursor = async ({ albumId, cursor }) => {
 
   // return imgData + next cursor
   return {
-    imgData: json.photos?.data?.map((_) => ({
-      id: _.id,
-      url: _.largest_image.source,
-    })),
-    nextCursor: json.photos?.paging?.cursors?.after || null,
+    imgData: json.data?.map((_) => ({ id: _.id, url: _.largest_image.source })),
+    nextCursor: json.paging?.cursors?.after || null,
   };
 };
 
