@@ -2,6 +2,14 @@
 
 Donate? Muốn hỗ trợ mình 1 ly cafe <3 [Donate here](https://github.com/HoangTran0410/HoangTran0410/blob/main/DONATE.md)
 
+## THÔNG BÁO: ĐÃ CÓ PHIÊN BẢN WEB TỐT HƠN [XEM NGAY](https://www.facebook.com/share/p/cPdJEQS43rzfgmxn/)
+
+Công cụ tải ảnh facebook hiện tại đã có phiên bản web (extension)
+
+Không cần cài đặt rườm rà
+
+![preview](https://i.imgur.com/67q5JQz.jpeg)
+
 ## QUAN TRỌNG - NÊN ĐỌC
 
 Hiện tại mình đang trong quá trình tích hợp FBMediaDownlader vào [Extension Useful-script](https://github.com/HoangTran0410/useful-script)
