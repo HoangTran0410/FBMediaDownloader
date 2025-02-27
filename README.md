@@ -12,19 +12,15 @@ Không cần cài đặt rườm rà
 
 ## QUAN TRỌNG - NÊN ĐỌC
 
-Hiện tại mình đang trong quá trình tích hợp FBMediaDownlader vào [Extension Useful-script](https://github.com/HoangTran0410/useful-script)
+Hiện tại mình đang trong quá trình tích hợp FBMediaDownlader vào [Extension FB AIO](https://chromewebstore.google.com/detail/fb-aio/ncncagnhhigemlgiflfgdhcdpipadmmm)
 
 - Mình sẽ không code thêm chức năng mới cho tool này nữa.
 
-- Các chức năng đã có, và chức năng mới sẽ được cập nhật bên Extension nhé.
+- Các chức năng đã có, và chức năng mới sẽ được cập nhật bên FB AIO nhé.
 
-- Sử dụng extension sẽ nhanh hơn, tiện hơn, không yêu cầu cài đặt phức tạp.
+- Sử dụng FB AIO sẽ nhanh hơn, tiện hơn, không yêu cầu cài đặt phức tạp.
 
-- Sử dụng extension sẽ tải về file chứa các link ảnh. Các bạn chỉ cần đưa danh sách link đó vào các trình tải xuống như [IDM](https://www.internetdownloadmanager.com/) hoặc [FDM](https://www.freedownloadmanager.org/download.htm) là có thể tải hết ảnh về rồi.
-
-- Extension còn có rất nhiều chức năng khác (>100 chức năng) đợi mọi người trải nghiệm.
-
-- Tải extension ngay [Tại đây](https://github.com/HoangTran0410/useful-script)
+- FB AIO còn có rất nhiều chức năng khác đợi mọi người trải nghiệm.
 
 ## Giới thiệu
 
